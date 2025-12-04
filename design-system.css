@@ -493,42 +493,50 @@ body {
 }
 
 /* ================================
-   SOUVENIRS SECTION
+   SOUVENIRS MODAL
    ================================ */
 
-.souvenirs-section {
+.souvenirs-modal-content {
     background: white;
+    width: 95vw;
+    max-width: 1400px;
+    height: 90vh;
     border-radius: var(--radius-lg);
-    padding: var(--spacing-8);
-    margin-bottom: var(--spacing-8);
-    box-shadow: var(--shadow-lg);
-    opacity: 0;
-    max-height: 0;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-.souvenirs-section.active {
-    opacity: 1;
-    max-height: 3000px;
-    margin-bottom: var(--spacing-10);
+.souvenirs-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-6) var(--spacing-8);
+    border-bottom: 2px solid var(--color-neutral-100);
+    background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-800));
+    color: white;
+    flex-shrink: 0;
 }
 
-.souvenirs-header {
-    text-align: center;
-    margin-bottom: var(--spacing-8);
-}
-
-.souvenirs-header h2 {
+.souvenirs-modal-header h2 {
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
-    color: var(--color-primary-700);
-    margin-bottom: var(--spacing-3);
+    margin: 0 0 var(--spacing-2) 0;
 }
 
-.souvenirs-header p {
-    font-size: var(--font-size-lg);
-    color: var(--color-neutral-600);
+.souvenirs-modal-header p {
+    font-size: var(--font-size-base);
+    margin: 0;
+    opacity: 0.9;
+}
+
+.souvenirs-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-8);
+    background: var(--color-neutral-50);
 }
 
 .souvenir-filters {
@@ -632,6 +640,16 @@ body {
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-700);
     margin-bottom: var(--spacing-2);
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.souvenir-name:hover {
+    color: var(--color-primary-500);
+    text-decoration: underline;
+    transform: translateX(4px);
 }
 
 .souvenir-name-en {
@@ -792,7 +810,7 @@ body {
 
 .timeline-item {
     position: relative;
-    margin-bottom: var(--spacing-12);
+    margin-bottom: var(--spacing-16);
     opacity: 0;
     animation: fadeInUp 0.6s ease-out forwards;
 }

@@ -327,26 +327,68 @@ let currentCategoryFilter = '全部';
 
 // Toggle souvenirs section
 function toggleSouvenirs() {
-    const section = document.getElementById('souvenirs-section');
-    const btn = document.querySelector('.souvenir-btn');
+    // Check if modal already exists
+    const existingModal = document.getElementById('souvenirs-modal');
+    if (existingModal) {
+        closeSouvenirsModal();
+        return;
+    }
 
-    if (section.classList.contains('active')) {
-        section.classList.remove('active');
-        btn.textContent = '🎁 伴手禮推薦';
-        section.style.display = 'none';
-    } else {
-        section.style.display = 'block';
-        setTimeout(() => {
-            section.classList.add('active');
-            btn.textContent = '✕ 收起伴手禮';
-        }, 10);
+    // Create modal
+    const modal = document.createElement('div');
+    modal.id = 'souvenirs-modal';
+    modal.className = 'modal-overlay';
+    modal.onclick = (e) => {
+        if (e.target === modal) closeSouvenirsModal();
+    };
 
-        // Initialize souvenirs if not already rendered
-        const locationFilters = document.getElementById('location-filters');
-        if (locationFilters.children.length === 0) {
-            initSouvenirFilters();
-            renderSouvenirs();
-        }
+    modal.innerHTML = `
+        <div class="souvenirs-modal-content">
+            <div class="souvenirs-modal-header">
+                <div>
+                    <h2>🎁 精選伴手禮推薦</h2>
+                    <p>帶回最道地的仙台・山形風味</p>
+                </div>
+                <button onclick="closeSouvenirsModal()" class="modal-close">✕</button>
+            </div>
+
+            <div class="souvenirs-modal-body">
+                <!-- Filters -->
+                <div class="souvenir-filters">
+                    <div class="filter-group">
+                        <label class="filter-label">📍 地區</label>
+                        <div id="location-filters" class="filter-buttons"></div>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">🏷️ 分類</label>
+                        <div id="category-filters" class="filter-buttons"></div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div id="souvenir-stats" class="souvenir-stats"></div>
+
+                <!-- Grid -->
+                <div id="souvenirs-grid" class="souvenirs-grid"></div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+
+    // Initialize filters and render
+    setTimeout(() => {
+        initSouvenirFilters();
+        renderSouvenirs();
+    }, 100);
+}
+
+function closeSouvenirsModal() {
+    const modal = document.getElementById('souvenirs-modal');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = '';
     }
 }
 
@@ -422,10 +464,12 @@ function renderSouvenirs() {
         card.style.animationDelay = `${index * 0.05}s`;
 
         const stars = '⭐'.repeat(souvenir.rating);
+        const searchQuery = encodeURIComponent(`${souvenir.name} ${souvenir.location} 伴手禮`);
+        const googleSearchUrl = `https://www.google.com/search?q=${searchQuery}`;
 
         card.innerHTML = `
             <div class="souvenir-card-header">
-                <div class="souvenir-name">${souvenir.name}</div>
+                <a href="${googleSearchUrl}" target="_blank" class="souvenir-name" title="點擊 Google 搜尋">${souvenir.name}</a>
                 <div class="souvenir-name-en">${souvenir.nameEn}</div>
                 <div class="souvenir-rating">${stars}</div>
             </div>
@@ -473,5 +517,6 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeDetails();
+        closeSouvenirsModal();
     }
 });
