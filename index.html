@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行程 - 2025日本東北之旅</title>
+    <link rel="stylesheet" href="design-system.css?v=5">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">2025 日本東北之旅</h1>
+                <p class="header-subtitle">仙台 · 山形 · 藏王 | 12月5日 - 12月13日</p>
+                <div class="weather-summary" id="weather-summary"></div>
+            </div>
+        </header>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="overview">總覽</button>
+            <button class="tab-btn" data-tab="day-1">12月5日<br><span class="day-label">第1天</span></button>
+            <button class="tab-btn" data-tab="day-2">12月6日<br><span class="day-label">第2天</span></button>
+            <button class="tab-btn" data-tab="day-3">12月7日<br><span class="day-label">第3天</span></button>
+            <button class="tab-btn" data-tab="day-4">12月8日<br><span class="day-label">第4天</span></button>
+            <button class="tab-btn" data-tab="day-5">12月9日<br><span class="day-label">第5天</span></button>
+            <button class="tab-btn" data-tab="day-6">12月10日<br><span class="day-label">第6天</span></button>
+            <button class="tab-btn" data-tab="day-7">12月11日<br><span class="day-label">第7天</span></button>
+            <button class="tab-btn" data-tab="day-8">12月12日<br><span class="day-label">第8天</span></button>
+            <button class="tab-btn" data-tab="day-9">12月13日<br><span class="day-label">第9天</span></button>
+            <button class="nav-arrow left" id="prevTab">‹</button>
+            <button class="nav-arrow right" id="nextTab">›</button>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content">
+            <!-- Overview Tab -->
+            <div class="tab-content active" id="overview">
+                <div class="overview-stats">
+                    <p>把眼睛留給風光，把體重留給美食</p>
+                    <p>去看看世界，用腳步去丈量世界，用眼睛去記錄風景</p>
+                    <div class="overview-buttons">
+                        <a href="https://docs.google.com/document/d/1VQ8YaB3IYx-JhTkaLkcdbFJiMRrbsyjpZIm2yDQahhA/edit?tab=t.0" target="_blank" class="overview-btn">查看行程</a>
+                        <button onclick="toggleSouvenirs()" class="overview-btn souvenir-btn">🎁 伴手禮推薦</button>
+                    </div>
+                </div>
+
+                <!-- Souvenirs Section -->
+                <div id="souvenirs-section" class="souvenirs-section" style="display: none;">
+                    <div class="souvenirs-header">
+                        <h2>🎁 精選伴手禮推薦</h2>
+                        <p>帶回最道地的仙台・山形風味</p>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="souvenir-filters">
+                        <div class="filter-group">
+                            <label class="filter-label">📍 地區</label>
+                            <div id="location-filters" class="filter-buttons"></div>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">🏷️ 分類</label>
+                            <div id="category-filters" class="filter-buttons"></div>
+                        </div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div id="souvenir-stats" class="souvenir-stats"></div>
+
+                    <!-- Grid -->
+                    <div id="souvenirs-grid" class="souvenirs-grid"></div>
+                </div>
+
+                <div id="overview-timeline"></div>
+            </div>
+
+            <!-- Day Tabs -->
+            <div class="tab-content" id="day-1">
+                <div class="day-header">
+                    <h2 class="day-title">第1天</h2>
+                    <p class="day-date">2025/12/5 (週五)</p>
+                    <p class="day-summary">台北出發 → 仙台機場 → 入住Hotel Vista Sendai → 品嚐仙台名物牛舌</p>
+                    <p class="departure-time">出發時間：08:00</p>
+                </div>
+                <div class="timeline" id="timeline-day-1"></div>
+            </div>
+
+            <div class="tab-content" id="day-2">
+                <div class="day-header">
+                    <h2 class="day-title">第2天</h2>
+                    <p class="day-date">2025/12/6 (週六)</p>
+                    <p class="day-summary">仙台市區觀光 → 瑞鳳殿 → 仙台城跡 → 大崎八幡宮 → 定禪寺通光之樂章</p>
+                    <p class="departure-time">出發時間：09:00</p>
+                </div>
+                <div class="timeline" id="timeline-day-2"></div>
+            </div>
+
+            <div class="tab-content" id="day-3">
+                <div class="day-header">
+                    <h2 class="day-title">第3天</h2>
+                    <p class="day-date">2025/12/7 (週日)</p>
+                    <p class="day-summary">松島一日遊 → 松島海岸 → 瑞巖寺・円通院 → 松島遊船 → 海鮮美食</p>
+                    <p class="departure-time">出發時間：09:30</p>
+                </div>
+                <div class="timeline" id="timeline-day-3"></div>
+            </div>
+
+            <div class="tab-content" id="day-4">
+                <div class="day-header">
+                    <h2 class="day-title">第4天</h2>
+                    <p class="day-date">2025/12/8 (週一)</p>
+                    <p class="day-summary">藏王狐狸村一日遊 → 與狐狸互動 → 銀山溫泉散策 → 大正浪漫街景</p>
+                    <p class="departure-time">出發時間：08:30</p>
+                </div>
+                <div class="timeline" id="timeline-day-4"></div>
+            </div>
+
+            <div class="tab-content" id="day-5">
+                <div class="day-header">
+                    <h2 class="day-title">第5天</h2>
+                    <p class="day-date">2025/12/9 (週二)</p>
+                    <p class="day-summary">仙台退房 → 前往山形 → 立石寺（山寺）登山 → 入住山形市區飯店</p>
+                    <p class="departure-time">出發時間：09:00</p>
+                </div>
+                <div class="timeline" id="timeline-day-5"></div>
+            </div>
+
+            <div class="tab-content" id="day-6">
+                <div class="day-header">
+                    <h2 class="day-title">第6天</h2>
+                    <p class="day-date">2025/12/10 (週三)</p>
+                    <p class="day-summary">前往藏王溫泉 → 溫泉街散策 → 入住昭四季溫泉酒店 → 享受溫泉美食</p>
+                    <p class="departure-time">出發時間：09:00</p>
+                </div>
+                <div class="timeline" id="timeline-day-6"></div>
+            </div>
+
+            <div class="tab-content" id="day-7">
+                <div class="day-header">
+                    <h2 class="day-title">第7天</h2>
+                    <p class="day-date">2025/12/11 (週四)</p>
+                    <p class="day-summary">藏王溫泉退房 → 返回山形市 → 霞城公園・文翔館 → 七日町商店街 → 山形美食</p>
+                    <p class="departure-time">出發時間：09:30</p>
+                </div>
+                <div class="timeline" id="timeline-day-7"></div>
+            </div>
+
+            <div class="tab-content" id="day-8">
+                <div class="day-header">
+                    <h2 class="day-title">第8天</h2>
+                    <p class="day-date">2025/12/12 (週五)</p>
+                    <p class="day-summary">山形退房 → 返回仙台 → 仙台市區購物 → 入住相鐵FRESA INN</p>
+                    <p class="departure-time">出發時間：09:30</p>
+                </div>
+                <div class="timeline" id="timeline-day-8"></div>
+            </div>
+
+            <div class="tab-content" id="day-9">
+                <div class="day-header">
+                    <h2 class="day-title">第9天</h2>
+                    <p class="day-date">2025/12/13 (週六)</p>
+                    <p class="day-summary">仙台朝市早餐 → 採購伴手禮 → 前往機場 → 返回台北</p>
+                    <p class="departure-time">出發時間：08:30</p>
+                </div>
+                <div class="timeline" id="timeline-day-9"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="data-enhanced.js"></script>
+    <script src="app-enhanced.js"></script>
+</body>
+</html>
