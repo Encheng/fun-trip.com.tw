@@ -1,2 +1,7 @@
 /data
 /docs
+
+# 靜態頁面管理工具（僅本地使用，不推送到 GitHub）
+/pages/index.html
+/pages/_registry.js
+/pages/pages-manager.js

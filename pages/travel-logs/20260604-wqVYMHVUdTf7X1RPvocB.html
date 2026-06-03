@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台東阿塱壹之旅 · 6/4–6/8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4ece0;
+    --paper-2:#ebe0cf;
+    --ink:#23383a;
+    --ink-soft:#4a605f;
+    --teal:#2c5d5b;
+    --teal-deep:#173536;
+    --coral:#c5512f;
+    --coral-soft:#d97a4e;
+    --sand:#caa14e;
+    --sage:#7e9374;
+    --line:#cdbfa8;
+    --card:#fbf6ec;
+    --shadow:0 18px 40px -22px rgba(23,53,54,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Noto Serif TC",serif;
+    color:var(--ink);
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(202,161,78,.10), transparent 42%),
+      radial-gradient(circle at 88% 92%, rgba(44,93,91,.12), transparent 48%);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* grain texture */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+  .wrap{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:0 22px 90px}
+
+  /* ---------- HERO ---------- */
+  header{
+    position:relative;padding:64px 0 38px;text-align:center;
+  }
+  .kicker{
+    font-family:"Fraunces",serif;font-style:italic;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;font-size:.82rem;
+    color:var(--coral);margin-bottom:14px;
+  }
+  h1{
+    font-family:"Noto Serif TC",serif;font-weight:900;
+    font-size:clamp(2.6rem,8vw,4.6rem);line-height:1.05;color:var(--teal-deep);
+    letter-spacing:.02em;
+  }
+  h1 .sea{color:var(--coral)}
+  .dates{
+    margin-top:18px;display:inline-flex;align-items:center;gap:14px;
+    font-family:"Fraunces",serif;font-weight:600;font-size:1.15rem;color:var(--ink-soft);
+  }
+  .dates span{display:inline-block;height:1px;width:46px;background:var(--line)}
+  .sub{margin-top:8px;color:var(--ink-soft);font-size:.95rem;letter-spacing:.04em}
+
+  /* ---------- QUICK FACTS ---------- */
+  .facts{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;margin:34px 0 8px;box-shadow:var(--shadow);
+  }
+  .fact{background:var(--card);padding:16px 12px;text-align:center}
+  .fact b{display:block;font-family:"Fraunces",serif;font-size:1.5rem;color:var(--teal);font-weight:900}
+  .fact small{display:block;font-size:.74rem;color:var(--ink-soft);letter-spacing:.08em;margin-top:3px}
+
+  /* ---------- TABS ---------- */
+  nav.tabs{
+    position:sticky;top:0;z-index:20;display:flex;gap:6px;flex-wrap:wrap;
+    justify-content:center;padding:14px 0;margin:24px -22px 0;
+    background:linear-gradient(var(--paper) 70%, transparent);
+  }
+  .tab{
+    font-family:"Fraunces",serif;font-weight:600;cursor:pointer;border:1px solid var(--line);
+    background:var(--card);color:var(--ink-soft);border-radius:999px;
+    padding:8px 16px;font-size:.9rem;transition:.25s;display:flex;flex-direction:column;
+    align-items:center;line-height:1.2;min-width:78px;
+  }
+  .tab small{font-family:"Noto Sans TC";font-size:.66rem;letter-spacing:.05em;opacity:.8}
+  .tab:hover{transform:translateY(-2px)}
+  .tab.active{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:var(--shadow)}
+  .tab.active small{opacity:.85}
+
+  /* ---------- DAY PANEL ---------- */
+  .day{display:none;animation:fade .5s ease}
+  .day.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+  .day-head{display:flex;align-items:flex-end;flex-wrap:wrap;gap:14px 18px;margin:36px 0 8px;padding-bottom:14px;border-bottom:2px solid var(--ink)}
+  .day-no{font-family:"Fraunces",serif;font-weight:900;font-size:3.4rem;line-height:.85;color:var(--coral)}
+  .day-head .t{flex:1}
+  .day-head .t h2{font-size:1.5rem;font-weight:900;color:var(--teal-deep)}
+  .day-head .t p{font-size:.86rem;color:var(--ink-soft);font-family:"Fraunces",serif;letter-spacing:.05em}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative;margin:26px 0 0;padding-left:0}
+  .stop{position:relative;display:grid;grid-template-columns:64px 1fr;gap:16px;padding-bottom:8px}
+  .stop .time{
+    font-family:"Fraunces",serif;font-weight:600;font-size:1.02rem;color:var(--teal);
+    text-align:right;padding-top:14px;white-space:nowrap;
+  }
+  .rail{position:relative}
+  .rail::before{content:"";position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--line)}
+  .stop:last-child .rail::before{display:none}
+  .dot{position:absolute;left:0;top:16px;width:16px;height:16px;border-radius:50%;
+    background:var(--card);border:3px solid var(--teal);z-index:2}
+  .stop.move .dot{border-color:var(--line);width:12px;height:12px;left:2px;top:18px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:13px;
+    padding:13px 16px;margin-left:26px;box-shadow:0 8px 22px -18px rgba(23,53,54,.5);
+    position:relative;
+  }
+  .stop.move .card{background:transparent;border:none;box-shadow:none;padding:6px 16px;margin-left:26px}
+  .place{font-weight:700;font-size:1.08rem;color:var(--ink);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding-right:62px}
+  .place .badge{font-family:"Fraunces",serif;font-size:.66rem;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;padding:2px 8px;border-radius:6px;background:var(--paper-2);color:var(--ink-soft)}
+  .place .badge.eat{background:#f1ddc6;color:var(--coral)}
+  .place .badge.move-b{background:#dfe8df;color:var(--sage)}
+  .place .badge.stay{background:#dce8e7;color:var(--teal)}
+  .addr{font-family:"Noto Sans TC";font-size:.82rem;color:var(--ink-soft);margin-top:3px}
+  .notes{font-size:.88rem;color:var(--ink-soft);margin-top:7px}
+  .notes .k{color:var(--coral);font-weight:600}
+  .move-text{font-family:"Noto Sans TC";font-size:.82rem;color:var(--ink-soft)}
+  .dur{display:inline-block;font-family:"Fraunces",serif;font-size:.72rem;color:var(--sage);
+    border:1px solid var(--line);border-radius:999px;padding:1px 9px;margin-left:4px}
+  .bus{display:inline-block;font-family:"Noto Sans TC";font-size:.78rem;background:#eadfca;color:var(--ink-soft);
+    border-radius:6px;padding:1px 7px;margin:2px 4px 0 0}
+  .maplink{position:absolute;top:10px;right:12px;z-index:3;display:inline-flex;align-items:center;gap:3px;
+    font-family:"Noto Sans TC";font-size:.74rem;font-weight:500;color:var(--teal);text-decoration:none;
+    border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 11px 5px 9px;
+    transition:.2s;white-space:nowrap;box-shadow:0 3px 8px -5px rgba(23,53,54,.5)}
+  .maplink:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .maplink:active{transform:scale(.95)}
+  .maplink svg{flex:0 0 auto}
+  .routebtn{margin-left:auto;align-self:center;font-family:"Fraunces",serif;font-weight:600;font-size:.84rem;
+    cursor:pointer;display:inline-flex;align-items:center;gap:6px;background:var(--coral);color:#fff;
+    text-decoration:none;border:none;border-radius:999px;padding:8px 16px;box-shadow:var(--shadow);transition:.2s}
+  .routebtn:hover{background:#a8421f;transform:translateY(-2px)}
+  .routebtn svg{flex:0 0 auto}
+  .stop.is-stay .card{background:#f8f0e1;border-color:#e6d6af}
+  .stop.is-stay .dot{background:var(--sand);border-color:var(--sand);box-shadow:0 0 0 4px rgba(202,161,78,.20)}
+  .stop.is-train .card{background:#f9e9e0;border-color:#ecccbc}
+  .stop.is-train .dot{background:var(--coral);border-color:var(--coral);box-shadow:0 0 0 4px rgba(197,81,47,.16)}
+
+  /* ---------- PREP CALLOUT ---------- */
+  .prep{
+    background:linear-gradient(150deg,var(--teal-deep),var(--teal));color:#f4ece0;
+    border-radius:18px;padding:28px 26px;margin:22px 0 8px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .prep::after{content:"阿塱壹";position:absolute;right:-6px;bottom:-28px;font-family:"Noto Serif TC";
+    font-weight:900;font-size:6rem;color:rgba(255,255,255,.06);letter-spacing:.05em}
+  .prep h3{font-size:1.35rem;font-weight:900;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+  .prep .lead{font-size:.86rem;opacity:.85;margin-bottom:18px;font-family:"Fraunces",serif;letter-spacing:.04em}
+  .prep ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
+  .prep li{font-size:.9rem;display:flex;gap:10px;align-items:flex-start;line-height:1.55}
+  .prep li i{font-style:normal;font-family:"Fraunces",serif;font-weight:900;color:var(--sand);flex:0 0 auto}
+  .prep li.warn i{color:var(--coral-soft)}
+  .prep .ban{margin-top:18px;background:rgba(197,81,47,.22);border:1px solid rgba(217,122,78,.5);
+    border-radius:10px;padding:11px 14px;font-size:.88rem;position:relative;z-index:2}
+
+  /* ---------- FOOTER NOTE ---------- */
+  .pnote{margin-top:30px;border:1px dashed var(--line);border-radius:13px;padding:16px 18px;
+    background:var(--card);font-size:.86rem;color:var(--ink-soft)}
+  .pnote b{color:var(--coral)}
+  footer{text-align:center;margin-top:54px;color:var(--ink-soft);font-size:.78rem;font-family:"Fraunces",serif;letter-spacing:.06em}
+  footer .wave{font-size:1.4rem;color:var(--teal)}
+
+  /* ---- 打包清單 ---- */
+  .pack-intro{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;margin:22px 0 6px;font-size:.9rem;color:var(--ink-soft);line-height:1.6}
+  .pack-intro b{color:var(--coral)}
+  .pack-bar-wrap{display:flex;align-items:center;gap:14px;margin:22px 0 10px}
+  .pack-bar-wrap .lbl{font-family:"Fraunces",serif;font-weight:600;font-size:.9rem;color:var(--teal);white-space:nowrap}
+  .pack-bar{flex:1;height:9px;background:var(--paper-2);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .pack-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sand),var(--teal));
+    border-radius:999px;transition:width .35s ease}
+  .pack-reset{font-family:"Noto Sans TC";font-size:.78rem;color:var(--ink-soft);cursor:pointer;
+    border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;transition:.2s}
+  .pack-reset:hover{background:var(--coral);color:#fff;border-color:var(--coral)}
+  .pack-cat{margin-top:24px}
+  .pack-cat > h3{font-size:1.18rem;font-weight:900;color:var(--teal-deep);margin-bottom:12px;
+    display:flex;align-items:center;gap:8px}
+  .pack-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border:1px solid var(--line);
+    border-radius:12px;background:var(--card);margin-bottom:8px;cursor:pointer;transition:.18s;user-select:none}
+  .pack-item:hover{border-color:var(--teal);transform:translateX(2px)}
+  .pack-item .box{flex:0 0 auto;width:21px;height:21px;border:2px solid var(--teal);border-radius:6px;
+    display:grid;place-items:center;margin-top:1px;transition:.18s}
+  .pack-item .box svg{width:13px;height:13px;opacity:0;transform:scale(.4);transition:.18s;color:#fff}
+  .pack-item .lbl{font-size:.96rem;line-height:1.45;font-weight:600;color:var(--ink)}
+  .pack-item .lbl small{display:block;font-family:"Noto Sans TC";font-size:.78rem;color:var(--ink-soft);font-weight:400;margin-top:1px}
+  .pack-item.done{background:#eceee7;border-color:#d9d3c2}
+  .pack-item.done .box{background:var(--teal);border-color:var(--teal)}
+  .pack-item.done .box svg{opacity:1;transform:scale(1)}
+  .pack-item.done .lbl{color:var(--ink-soft);text-decoration:line-through;opacity:.65}
+  .pack-cat.alangyi{background:linear-gradient(150deg,var(--teal-deep),var(--teal));border-radius:18px;
+    padding:22px 22px 16px;color:#f4ece0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .pack-cat.alangyi::after{content:"阿塱壹";position:absolute;right:-6px;bottom:-26px;font-family:"Noto Serif TC";
+    font-weight:900;font-size:5.5rem;color:rgba(255,255,255,.06)}
+  .pack-cat.alangyi > h3{color:#fff;position:relative;z-index:2}
+  .pack-cat.alangyi .pack-item{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);position:relative;z-index:2}
+  .pack-cat.alangyi .pack-item:hover{border-color:var(--sand)}
+  .pack-cat.alangyi .pack-item .box{border-color:var(--sand)}
+  .pack-cat.alangyi .pack-item .lbl{color:#f4ece0}
+  .pack-cat.alangyi .pack-item .lbl small{color:rgba(244,236,224,.72)}
+  .pack-cat.alangyi .pack-item.done{background:rgba(255,255,255,.04)}
+  .pack-cat.alangyi .pack-item.done .box{background:var(--sand);border-color:var(--sand)}
+  .pack-cat.alangyi .pack-item.done .lbl{color:rgba(244,236,224,.55)}
+
+  @media(max-width:600px){
+    .facts{grid-template-columns:repeat(2,1fr)}
+    .prep ul{grid-template-columns:1fr}
+    .stop{grid-template-columns:48px 1fr;gap:10px}
+    .card,.stop.move .card{margin-left:18px}
+    h1{font-size:2.7rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Taitung · East Coast Journey</div>
+    <h1>台東<span class="sea">阿塱壹</span>之旅</h1>
+    <div class="dates"><span></span>2026 · 6/4 — 6/8<span></span></div>
+    <div class="sub">五天四夜 · 海岸古道 · 排灣部落 · 縱谷池上 · 四人同行</div>
+
+    <div class="facts">
+      <div class="fact"><b>5</b><small>天 DAYS</small></div>
+      <div class="fact"><b>4</b><small>人 PEOPLE</small></div>
+      <div class="fact"><b>9km</b><small>阿塱壹古道</small></div>
+      <div class="fact"><b>TPASS</b><small>$299 加值</small></div>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <div class="tab active" data-day="1">6/4<small>抵達・藝術</small></div>
+    <div class="tab" data-day="2">6/5<small>阿塱壹</small></div>
+    <div class="tab" data-day="3">6/6<small>池上</small></div>
+    <div class="tab" data-day="4">6/7<small>東海岸</small></div>
+    <div class="tab" data-day="5">6/8<small>市區・返程</small></div>
+    <div class="tab" data-day="6">打包<small>清單</small></div>
+  </nav>
+
+  <!-- ================= DAY 1 ================= -->
+  <section class="day show" data-day="1">
+    <div class="day-head">
+      <div class="day-no">01</div>
+      <div class="t"><h2>台北南下・江賢二藝術園區</h2><p>THU · 6 / 4 — 抵達台東，午後看海與藝術</p></div>
+    </div>
+    <div class="timeline">
+
+      <div class="stop"><div class="time">06:10</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台北家出發 <span class="badge move-b">交通</span></div>
+        <div class="notes">公車 + 捷運前往台北車站，<span class="k">車站買早餐或先準備麵包</span>。</div></div></div></div>
+
+      <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="move-text">↓ 約 50 分鐘<span class="dur">50 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">07:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台北車站 → 台東 <span class="badge">台鐵</span></div>
+        <div class="addr">自強 3000 · 408 車次 · 8 車 10 / 12 / 14 / 16 號</div>
+        <div class="notes">07:20 ~ 11:10　$936 × 4 = <span class="k">$3,744（5/11 已線上付款）</span></div></div></div></div>
+
+      <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="move-text">↓ 車程 3 小時 50 分<span class="dur">3h50m</span></div></div></div></div>
+
+      <div class="stop"><div class="time">11:10</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東火車站</div>
+        <div class="addr">旅遊服務中心【三合一自助售票機】</div>
+        <div class="notes"><span class="k">TPASS 加值 $299</span>（確認儲值卡餘額 $350 以上）。可搭：市區觀光循環線、陸海空 A/B/C 線（普悠瑪客運）、區間（快）/莒光/PP 自強（限非對號）、東台灣・興東・統聯客運。<span class="k">記得拍公車路線圖。</span></div></div></div></div>
+
+      <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="move-text">↓ 約 20 分鐘<span class="dur">20 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">11:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">途中 台東青年旅舍 <span class="badge stay">住宿 6/4–6/5</span></div>
+        <div class="addr">台東市安和路 102 巷 30 號 · 0965-577167</div>
+        <div class="notes">背包狗「阿塱壹古道健行 ＋ 排灣部落美食團」。升等四人套房（含衛浴）並續住一天 <span class="k">$18,192（1/31 轉帳付清）</span>。入住 15:00 後・退房 11:30，<span class="k">可先寄放行李</span>。</div></div></div></div>
+
+      <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="move-text">↓ 約 11 分鐘<span class="dur">11 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">11:50</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">公車站（車站前） <span class="badge move-b">交通</span></div>
+        <div class="notes">搭 <span class="bus">8101（12:20 轉運站發）</span><span class="bus">8103（11:30 轉運站發）</span>前往江賢二藝術園區。午餐：火車站外帶，或園區內<span class="k">德布西咖啡</span>。</div></div></div></div>
+
+      <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="move-text">↓ 約 55 分鐘<span class="dur">55 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">13:35</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">江賢二藝術園區</div>
+        <div class="addr">台東縣東河鄉金樽 132-2 號 · 0966-421-049</div>
+        <div class="notes"><span class="k">$280/人 × 4 = $1,120</span>。10:00–17:00（最後入園 16:30，週二休）。預約時段 13:00~14:00。定時導覽 14:30（約 40–45 分）；導覽機有限，<span class="k">導覽前 20 分鐘於接待中心登記，額滿為止</span>。雙肩背包或超過 40×30×20cm 物件須寄物。</div></div></div></div>
+
+      <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="move-text">↓ 約 1 小時 30 分<span class="dur">1h30m</span></div></div></div></div>
+
+      <div class="stop"><div class="time">16:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">藝術園區站 → 回台東市 <span class="badge move-b">交通</span></div>
+        <div class="notes"><span class="bus">8101 火 16:10/17:50</span><span class="bus">8102 17:25</span><span class="bus">8109 火 17:30</span><span class="bus">8119 17:16</span></div></div></div></div>
+
+      <div class="stop"><div class="time">17:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">SP 夏帕義大利麵（正氣店） <span class="badge eat">晚餐</span></div>
+        <div class="addr">台東市正氣路 366-1 號 · 089-333050（11:00~21:00）</div>
+        <div class="notes">搭 8101/8102/8109/8119 至<span class="k">中央市場站，走路 6 分鐘</span>。</div></div></div></div>
+
+      <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="move-text">↓ 約 25 分鐘<span class="dur">25 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">18:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東縣立圖書館</div>
+        <div class="addr">台東市民族里南京路 25 號</div>
+        <div class="notes">週日/一休館；二~五 8:00~21:00、六 8:00~17:30。<span class="dur">步行 5 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">19:50</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">回 途中 台東青年旅舍 <span class="badge move-b">交通</span></div>
+        <div class="notes"><span class="bus">202 中央市場（20:00 轉運站發）</span><span class="bus">8103 中央市場（19:00/20:50）</span><span class="bus">8109 中央市場（18:30）</span></div></div></div></div>
+
+    </div>
+  </section>
+
+  <!-- ================= DAY 2 ================= -->
+  <section class="day" data-day="2">
+    <div class="day-head">
+      <div class="day-no">02</div>
+      <div class="t"><h2>阿塱壹古道・排灣風味</h2><p>FRI · 6 / 5 — 全日重頭戲，健行 9 公里看海</p></div>
+    </div>
+
+    <!-- PREP CALLOUT -->
+    <div class="prep">
+      <h3>🥾 阿塱壹保留區 · 行前準備</h3>
+      <div class="lead">Alangyi Trail · 健行約 4–5 小時，距離 9 公里</div>
+      <ul>
+        <li><i>1</i><span>準備 <b>2000cc 以上</b>的水量與運動飲料</span></li>
+        <li><i>2</i><span>自備熱量食物</span></li>
+        <li class="warn"><i>3</i><span><b>務必帶身分證件</b>，進入管制區檢查用</span></li>
+        <li class="warn"><i>4</i><span>運動服 / 排汗衣、「平常有在穿」的運動鞋或登山鞋、毛巾、手套；<b>勿穿厚底增高鞋</b></span></li>
+        <li><i>5</i><span>天氣炎熱請帶雨傘（大隻可當登山杖）、綁繩遮陽帽</span></li>
+        <li><i>6</i><span>遇雨請帶雨具，建議帶雨衣</span></li>
+        <li><i>7</i><span>慢性病者記得隨身帶藥物</span></li>
+        <li><i>8</i><span>身體不適者請斟酌體力健行</span></li>
+        <li><i>9</i><span>暈車藥、裝垃圾的小塑膠袋；可備一雙拖鞋，走完古道換穿</span></li>
+        <li><i>10</i><span>住宿備有沐浴乳/洗髮精/吹風機；<b>牙刷、牙膏、毛巾需自備</b></span></li>
+      </ul>
+      <div class="ban">🚫 保留區嚴禁攜帶<b>寵物</b>、<b>煙火炊煮</b>及<b>空拍</b></div>
+    </div>
+
+    <div class="timeline">
+      <div class="stop"><div class="time">06:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東出發 <span class="badge eat">早餐</span></div>
+        <div class="notes">青年旅舍早餐（吐司夾蛋），出發前往旭海。</div></div></div></div>
+
+      <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="move-text">↓ 車程約 3 小時<span class="dur">3h</span></div></div></div></div>
+
+      <div class="stop"><div class="time">09:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">旭海公共停車場</div>
+        <div class="notes">與解說員會合。<span class="dur">5 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">09:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">漫遊阿塱壹 🌊</div>
+        <div class="notes">09:30~14:00【漫遊阿朗壹】海岸古道健行。<span class="dur">4h30m</span></div></div></div></div>
+
+      <div class="stop"><div class="time">14:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">部落廚房 <span class="badge eat">午餐</span></div>
+        <div class="notes">排灣族風味料理　14:00~15:30。<span class="dur">1h30m</span></div></div></div></div>
+
+      <div class="stop move"><div class="time">15:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="move-text">從安朔回台東 ↓ 約 2 小時<span class="dur">2h</span></div></div></div></div>
+
+      <div class="stop"><div class="time">18:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東 · 背包狗下車</div>
+        <div class="notes">步行前往晚餐。<span class="dur">步行 5 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">18:10</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">濯 餐酒館 Draw Bistro <span class="badge eat">晚餐</span></div>
+        <div class="addr">台東市復興路 103 號 · 08-9320050</div>
+        <div class="notes"><span class="k">須先訂位 18:10</span>，步行 6 分鐘可達。</div></div></div></div>
+
+      <div class="stop"><div class="time">19:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">逛在地手提包（帆布行）</div>
+        <div class="addr">台東帆布行 · 正氣路 202 號　／　東昌帆布行 · 正氣路 192 號</div>
+        <div class="notes"><span class="dur">25 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">20:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">回 途中・台東 <span class="badge move-b">交通</span></div>
+        <div class="notes"><span class="bus">202 中央市場（18:20/20:00/21:00）</span><span class="bus">8103 中央市場（19:00/20:50）</span><span class="bus">101 逆循環・中華正氣路口（18:30 火車站發）</span></div></div></div></div>
+    </div>
+  </section>
+
+  <!-- ================= DAY 3 ================= -->
+  <section class="day" data-day="3">
+    <div class="day-head">
+      <div class="day-no">03</div>
+      <div class="t"><h2>池上一日・伯朗大道</h2><p>SAT · 6 / 6 — 縱谷單車與書房，傍晚回台東換宿</p></div>
+    </div>
+    <div class="timeline">
+
+      <div class="stop"><div class="time">07:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東 <span class="badge eat">早餐</span></div>
+        <div class="notes">早餐後寄放行李（途中或火車站行李房）。<span class="dur">10 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">09:40</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東 → 池上 <span class="badge">台鐵</span></div>
+        <div class="notes">區間車 4521 車次 10:00~10:52（備案：4519 車次 7:20~8:10）。<span class="dur">1h</span></div></div></div></div>
+
+      <div class="stop"><div class="time">11:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">池上騎點租車（阿度的店加盟） <span class="badge move-b">租車</span></div>
+        <div class="addr">池上鄉中山路 322 號 · 0916-576757</div>
+        <div class="notes">四人電動車 <span class="k">$640/3hr</span>、$800/不限時（預計租 3 小時）；或 Ubike $24/hr。<span class="dur">4 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">11:15</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">大池豆皮店 <span class="badge eat">吃</span></div>
+        <div class="addr">池上鄉大埔路 39 之 2 號 · 089-862392（07:00~14:00）</div>
+        <div class="notes"><span class="dur">8 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">11:45</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">伯朗大道園區 🚲</div>
+        <div class="notes">大水車 / 金城武樹 / 伯朗相框 / 天堂路 / 大觀亭 / 洗衣亭。<span class="dur">6 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">12:45</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">大坡池風景區</div>
+        <div class="notes">裝置藝術「阿嬤的叮囑」/《YANSHI》/「捨入誤差」、大坡池圓形廣場。<span class="dur">5 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">13:50</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">池上騎點租車 · 還車</div>
+        <div class="notes"><span class="dur">5 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">14:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">池上好店（多力米餐廳） <span class="badge eat">午餐</span></div>
+        <div class="addr">池上鄉中山路 193 號 · 089-864283</div>
+        <div class="notes"><span class="k">最晚點餐 14:30</span>。<span class="dur">5 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">14:50</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">池上蔣勳書房</div>
+        <div class="addr">池上鄉中華路 9 號</div>
+        <div class="notes">預約場次 15:00（60 分鐘），<span class="k">須脫鞋穿襪</span>。<span class="dur">10 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">16:10</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">秋菊皂坊</div>
+        <div class="addr">池上鄉仁愛路 191 號 · 089-861172（09:00~21:00）</div>
+        <div class="notes"><span class="dur">8 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">17:20</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">池上 → 台東 <span class="badge">台鐵</span></div>
+        <div class="notes">區間車 4542 車次 17:34~18:44（備案：4534 車次 15:37~16:36）。<span class="dur">1h10m</span></div></div></div></div>
+
+      <div class="stop"><div class="time">19:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東 · 取行李 <span class="badge move-b">交通</span></div>
+        <div class="notes">取行李後火車站前搭車：<span class="bus">202 中央市場下（19:40/20:30）</span><span class="bus">101 台東轉運站下（19:00/20:00）</span></div></div></div></div>
+
+      <div class="stop"><div class="time">19:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東沐舍文旅 <span class="badge stay">住宿 6/6–6/8</span></div>
+        <div class="addr">台東市中山路 393 號 3 樓 · 089-350201</div>
+        <div class="notes">豪華四人房 <span class="k">$7,590（3/29 信用卡付清）</span>。入住 15:00・退房 11:00・早餐 6:30。訂單編號 H20260329kvHUZt。</div></div></div></div>
+
+      <div class="stop"><div class="time">19:50</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">義回生餓回熟 <span class="badge eat">晚餐</span></div>
+        <div class="addr">台東市長安街 2-1 號 · 089-338331（17:00~22:00）</div>
+        <div class="notes">義大利麵 / 燉飯。</div></div></div></div>
+
+      <div class="stop"><div class="time">21:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">鐵花村音樂聚落 · 慢市集 🎶</div>
+        <div class="addr">樂活市集 新生路 135 巷 26 號（17:00~22:00，週一~二休）／ 鐵花路 370 號（18:00~22:00，週一~三休）</div>
+        <div class="notes">逛完回沐舍文旅。</div></div></div></div>
+    </div>
+  </section>
+
+  <!-- ================= DAY 4 ================= -->
+  <section class="day" data-day="4">
+    <div class="day-head">
+      <div class="day-no">04</div>
+      <div class="t"><h2>東海岸好行・三仙台</h2><p>SUN · 6 / 7 — 台灣好行一日遊，傍晚回市區</p></div>
+    </div>
+    <div class="timeline">
+
+      <div class="stop"><div class="time">07:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東沐舍文旅 <span class="badge eat">早餐</span></div>
+        <div class="notes"><span class="dur">10 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">08:10</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東轉運站 → 台灣好行一日遊 <span class="badge move-b">8:30 發車</span></div>
+        <div class="notes"><span class="k">8101A 路線</span>：小野柳 / 渚橋 / 阿美民俗中心 / 成功漁港 / 成功 / 三仙台 / 水往上流。</div></div></div></div>
+
+      <div class="stop"><div class="time">12:10</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">成功漁港 <span class="badge eat">午餐</span></div>
+        <div class="notes">旗遇海味，<span class="k">訂位 12:20</span>。</div></div></div></div>
+
+      <div class="stop"><div class="time">17:15</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東轉運站</div>
+        <div class="notes">步行前往晚餐。<span class="dur">步行 6 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">17:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東客來吃樂 <span class="badge eat">晚餐</span></div>
+        <div class="addr">台東市新生路 218 號 · 089-343096（10:00~20:00）</div>
+        <div class="notes">蚵仔麵線 / 綠豆算（冰）。<span class="k">店休不固定，出發前查 FB。</span>備案：義回生餓回熟（長安街 2-1 號）。<span class="dur">步行 4 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">19:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">允芳茶園</div>
+        <div class="addr">台東市更生路 315 號（10:00~21:00）</div>
+        <div class="notes">公車 8109/8103/8135「變更所」站。<span class="dur">16 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">19:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">田間烘焙坊（鹽可頌）</div>
+        <div class="addr">台東市中山路 323 巷 2 號 · 0966-441675（08:00~20:00，週一休）</div>
+        <div class="notes">買完回沐舍文旅。</div></div></div></div>
+    </div>
+  </section>
+
+  <!-- ================= DAY 5 ================= -->
+  <section class="day" data-day="5">
+    <div class="day-head">
+      <div class="day-no">05</div>
+      <div class="t"><h2>市區巡禮・北返</h2><p>MON · 6 / 8 — 森林公園單車、伴手禮，傍晚搭車回台北</p></div>
+    </div>
+    <div class="timeline">
+
+      <div class="stop"><div class="time">09:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東沐舍文旅 <span class="badge eat">早餐 7:30</span></div>
+        <div class="notes">早餐後寄放行李。<span class="dur">8 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">09:10</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東森林公園 🚲</div>
+        <div class="notes">租腳踏車遊公園（停留 90 分鐘）。搭公車或騎 Ubike $24/hr（4 小時內）；文旅到公園約騎 8 分鐘。<span class="dur">5 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">11:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">阿咪米苔目 <span class="badge eat">午餐</span></div>
+        <div class="addr">台東市中正里福建路 78 號（7:30~15:00，週四休）</div>
+        <div class="notes">備案：香琪鴨肉（興國里福建路 241-1 號，11:00~14:30）。<span class="dur">3 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">12:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">果珍濃 台東水果珍奶 <span class="badge eat">外帶</span></div>
+        <div class="addr">台東市大同路 212 巷 4 號</div>
+        <div class="notes">準 10 點營業，賣完提前打烊（週三休）。<span class="dur">2 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">12:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">鯉魚山步道</div>
+        <div class="notes">Ubike 還車 · 微光市集。</div></div></div></div>
+
+      <div class="stop"><div class="time">14:30</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東縣農漁物產館 <span class="badge">伴手禮</span></div>
+        <div class="addr">台東市博愛路 405 號（14:00~22:00）</div>
+        <div class="notes">採買伴手禮。</div></div></div></div>
+
+      <div class="stop"><div class="time">15:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">鐵花 · 村長的家</div>
+        <div class="addr">台東市鐵花路 350 號 · 0981-284007（14:00~22:00，週二休）</div></div></div></div>
+
+      <div class="stop"><div class="time">16:00</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東沐舍文旅 · 領行李 <span class="badge move-b">交通</span></div>
+        <div class="notes">領行李搭公車至火車站：<span class="bus">202 中央市場（15:40/16:40）</span><span class="bus">101 逆循環・轉運站（15:30/16:30）</span><span class="dur">30 min</span></div></div></div></div>
+
+      <div class="stop"><div class="time">17:25</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台東 → 台北 <span class="badge">台鐵</span></div>
+        <div class="addr">自強 3000 · 441 車次</div>
+        <div class="notes">17:46 ~ 21:38　$936 × 4 = <span class="k">$3,744</span>。<span class="dur">3h52m</span></div></div></div></div>
+
+      <div class="stop"><div class="time">21:38</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">台北車站</div>
+        <div class="notes">捷運 + 公車。</div></div></div></div>
+
+      <div class="stop"><div class="time">22:20</div><div class="rail"><div class="dot"></div>
+        <div class="card"><div class="place">溫暖的家 🏠</div>
+        <div class="notes">旅程結束，回到家！</div></div></div></div>
+    </div>
+  </section>
+
+  <!-- ================= PACKING ================= -->
+  <section class="day" data-day="6">
+    <div class="day-head">
+      <div class="day-no">🎒</div>
+      <div class="t"><h2>打包清單</h2><p>CHECKLIST — 點一下打勾，出發前邊收邊確認</p></div>
+    </div>
+
+    <div class="pack-intro">
+      🌤️ <b>天氣重點</b>：白天約 30°C、夜間悶熱約 25°C，午後易雷陣雨；<b>6/5 阿塱壹降雨機率高，雨衣務必帶</b>。
+      穿排汗快乾衣物，隨身一件薄外套（冷氣/海風/火車），加上遮陽帽與太陽眼鏡。
+    </div>
+
+    <div class="pack-bar-wrap">
+      <span class="lbl">已打包 <span id="packCount">0 / 0</span></span>
+      <div class="pack-bar"><i id="packBar"></i></div>
+      <span class="pack-reset" id="packReset">重設</span>
+    </div>
+
+    <div class="pack-cat">
+      <h3>🪪 證件・票券（最重要）</h3>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">身分證 ‼️<small>阿塱壹管制區檢查必帶</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">健保卡</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">悠遊卡<small>記得加值台東 TPASS $299</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">現金 + 信用卡</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">訂房/訂位確認<small>青旅・沐舍 H20260329kvHUZt・台鐵車票・餐廳訂位</small></div></div>
+    </div>
+
+    <div class="pack-cat alangyi">
+      <h3>🥾 阿塱壹專用（6/5 健行）</h3>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">2000cc 以上的水 + 運動飲料</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">自備熱量食物</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">雨衣<small>海邊風大，比雨傘實際</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">大支雨傘<small>也可當登山杖使用</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">綁繩遮陽帽</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">手套・毛巾</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">登山鞋/運動鞋<small>平常穿慣的，勿穿厚底增高鞋</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">拖鞋<small>走完古道換穿</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">暈車藥・個人慢性病藥</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">裝垃圾的小塑膠袋</div></div>
+    </div>
+
+    <div class="pack-cat">
+      <h3>👕 衣物</h3>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">排汗/快乾上衣 ×4–5</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">輕便褲子<small>長短各備</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">換洗內衣襪<small>蔣勳書房須脫鞋穿襪</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">薄外套/防曬外套<small>冷氣・海風・火車通用</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">稍體面休閒服一套<small>濯 餐酒館晚餐</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">遮陽帽・太陽眼鏡</div></div>
+    </div>
+
+    <div class="pack-cat">
+      <h3>☔ 雨具・防潮</h3>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">輕便雨衣 + 折疊傘<small>整趟都可能下雨</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">夾鏈袋/防水袋<small>保護手機・證件・相機</small></div></div>
+    </div>
+
+    <div class="pack-cat">
+      <h3>🧴 盥洗・個人</h3>
+      <div class="pack-intro" style="margin:0 0 10px">住宿備有沐浴乳、洗髮精、吹風機；以下需<b>自備</b>。</div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">牙刷、牙膏</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">毛巾</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">高係數防曬乳</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">曬後修護（蘆薈）</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">保養品・隱形眼鏡用品</div></div>
+    </div>
+
+    <div class="pack-cat">
+      <h3>🔌 電子</h3>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">手機 + 充電線/充電頭</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">行動電源<small>台鐵單程約 4 小時</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">Garmin 手錶充電線<small>專用線，記得帶</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">耳機・相機</div></div>
+    </div>
+
+    <div class="pack-cat">
+      <h3>🩹 健康・小物</h3>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">防蚊液<small>海邊・縱谷</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">OK繃/防水貼・腸胃藥・常備藥</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">環保購物袋<small>農漁物產館・池上・伴手禮採買</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">保冷水壺・小包面紙/濕紙巾</div></div>
+    </div>
+  </section>
+
+  <div class="pnote">
+    📌 <b>小提醒</b>：① 帶悠遊卡加值台東 TPASS <b>$299</b>　② 池上蔣勳書坊<b>須脫鞋穿襪子</b>　③ 阿塱壹進管制區<b>務必帶身分證件</b>
+  </div>
+
+  <footer>
+    <div class="wave">〜〜〜</div>
+    台東 · 阿塱壹 · 縱谷　2026.6.4 – 6.8
+  </footer>
+
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const days = document.querySelectorAll('.day');
+  tabs.forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      const d = tab.dataset.day;
+      tabs.forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      days.forEach(s=>s.classList.toggle('show', s.dataset.day===d));
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+
+  /* ---- Google Maps：地點連結 + 每日整日路線 + 住宿/車站標記 ---- */
+  const skip = ['出發','溫暖的家','公車站','→','取行李','領行李','下車','回 途中','還車'];
+  const addrHints = ['號','路','街','巷','大道','鄉','村','里','段'];
+  const clean = t => t.replace(/[🌊🚲🎶🏠🥾📍🚫]/g,'').replace(/\s+/g,' ').trim();
+  const pinSvg = '<svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor">'
+    + '<path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5'
+    + 'A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>';
+  const routeSvg = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" '
+    + 'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+    + '<circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="5" r="2.4"/>'
+    + '<path d="M8.4 19H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.6"/></svg>';
+
+  function placeQuery(card){
+    const placeEl = card.querySelector('.place');
+    if(!placeEl) return null;
+    const tmp = placeEl.cloneNode(true);
+    tmp.querySelectorAll('.badge').forEach(b=>b.remove());
+    const name = clean(tmp.textContent);
+    if(!name || name==='台東' || name==='池上') return null;
+    if(skip.some(s=>name.includes(s))) return null;
+    let query = name;
+    const addrEl = card.querySelector('.addr');
+    if(addrEl){
+      const addr = addrEl.textContent.split('·')[0].split('／')[0]
+                   .split('（')[0].split('(')[0].trim();
+      if(addr && addrHints.some(h=>addr.includes(h))) query = addr;
+    }
+    return { placeEl, query };
+  }
+
+  function markCard(card){
+    const place = card.querySelector('.place');
+    const stop = card.closest('.stop');
+    if(!stop) return;
+    const badges = [...card.querySelectorAll('.badge')].map(b=>b.textContent);
+    const ptxt = place ? place.textContent : '';
+    if(card.querySelector('.badge.stay')) stop.classList.add('is-stay');
+    else if(badges.includes('台鐵') || /火車站|轉運站/.test(ptxt)) stop.classList.add('is-train');
+  }
+
+  document.querySelectorAll('.day').forEach(day=>{
+    const stops = [];
+    day.querySelectorAll('.card').forEach(card=>{
+      markCard(card);
+      const r = placeQuery(card);
+      if(!r) return;
+      if(!r.placeEl.querySelector('.maplink')){
+        const a = document.createElement('a');
+        a.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.query);
+        a.target = '_blank'; a.rel = 'noopener'; a.className = 'maplink';
+        a.innerHTML = pinSvg + '地圖';
+        r.placeEl.appendChild(a);
+      }
+      stops.push(r.query);
+    });
+
+    if(stops.length >= 2){
+      const url = 'https://www.google.com/maps/dir/' +
+                  stops.slice(0,10).map(encodeURIComponent).join('/');
+      const btn = document.createElement('a');
+      btn.href = url; btn.target = '_blank'; btn.rel = 'noopener'; btn.className = 'routebtn';
+      btn.innerHTML = routeSvg + '整日路線';
+      day.querySelector('.day-head').appendChild(btn);
+    }
+  });
+
+  /* ---- 打包清單：勾選 + 進度 + 記憶 ---- */
+  const PKEY = 'alangyi_pack_v1';
+  const pload = () => { try { return JSON.parse(localStorage.getItem(PKEY)) || {}; } catch(e){ return {}; } };
+  const psave = s => { try { localStorage.setItem(PKEY, JSON.stringify(s)); } catch(e){} };
+  let pstate = pload();
+  const pitems = document.querySelectorAll('.pack-item');
+  const pcount = document.getElementById('packCount');
+  const pbar = document.getElementById('packBar');
+
+  function pupdate(){
+    let done = 0;
+    pitems.forEach(it => { if(it.classList.contains('done')) done++; });
+    if(pcount) pcount.textContent = done + ' / ' + pitems.length;
+    if(pbar) pbar.style.width = (pitems.length ? done / pitems.length * 100 : 0) + '%';
+  }
+
+  pitems.forEach((it,i)=>{
+    const id = 'i' + i;
+    if(pstate[id]) it.classList.add('done');
+    it.addEventListener('click', ()=>{
+      it.classList.toggle('done');
+      pstate[id] = it.classList.contains('done');
+      psave(pstate);
+      pupdate();
+    });
+  });
+  pupdate();
+
+  const preset = document.getElementById('packReset');
+  if(preset) preset.addEventListener('click', ()=>{
+    pitems.forEach(it => it.classList.remove('done'));
+    pstate = {};
+    psave(pstate);
+    pupdate();
+  });
+</script>
+</body>
+</html>

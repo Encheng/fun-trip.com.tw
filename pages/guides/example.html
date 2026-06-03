@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>範例靜態頁面 - 2025日本東北之旅</title>
+    <link rel="stylesheet" href="../../design-system.css">
+    <style>
+        .static-page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-8) var(--spacing-4);
+        }
+
+        .page-header {
+            margin-bottom: var(--spacing-8);
+            padding-bottom: var(--spacing-4);
+            border-bottom: 2px solid var(--color-primary-200);
+        }
+
+        .page-title {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-neutral-900);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .page-meta {
+            color: var(--color-neutral-600);
+            font-size: var(--font-size-sm);
+        }
+
+        .page-content {
+            line-height: 1.8;
+            color: var(--color-neutral-700);
+        }
+
+        .page-content h2 {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-neutral-900);
+            margin-top: var(--spacing-8);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .page-content h3 {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-neutral-800);
+            margin-top: var(--spacing-6);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .page-content p {
+            margin-bottom: var(--spacing-4);
+        }
+
+        .page-content ul, .page-content ol {
+            margin-bottom: var(--spacing-4);
+            padding-left: var(--spacing-6);
+        }
+
+        .page-content li {
+            margin-bottom: var(--spacing-2);
+        }
+
+        .info-card {
+            background: var(--color-primary-50);
+            border-left: 4px solid var(--color-primary-500);
+            padding: var(--spacing-4);
+            margin: var(--spacing-6) 0;
+            border-radius: var(--border-radius-md);
+        }
+
+        .info-card h4 {
+            color: var(--color-primary-700);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .page-footer {
+            margin-top: var(--spacing-12);
+            padding-top: var(--spacing-4);
+            border-top: 1px solid var(--color-neutral-200);
+            text-align: center;
+            color: var(--color-neutral-500);
+            font-size: var(--font-size-sm);
+        }
+    </style>
+</head>
+<body>
+    <div class="static-page-container">
+        <header class="page-header">
+            <h1 class="page-title">範例靜態頁面</h1>
+            <div class="page-meta">
+                <span>作者：PeterLu</span> |
+                <span>日期：2025-12-15</span> |
+                <span>分類：指南</span>
+            </div>
+        </header>
+
+        <main class="page-content">
+            <h2>歡迎使用靜態頁面系統</h2>
+            <p>這是一個範例靜態頁面，展示了如何使用設計系統來建立美觀、一致的靜態內容。</p>
+
+            <h3>主要特點</h3>
+            <ul>
+                <li><strong>完全獨立</strong>：每個靜態頁面都是獨立的，沒有指向其他頁面的連結</li>
+                <li><strong>設計一致</strong>：繼承主應用的 design-system.css，確保視覺風格統一</li>
+                <li><strong>隱私保護</strong>：管理檔案不會被推送到 GitHub，訪客無法發現其他頁面</li>
+                <li><strong>易於使用</strong>：只需將完整的 HTML 檔案放入對應類別目錄即可</li>
+            </ul>
+
+            <div class="info-card">
+                <h4>重要提示</h4>
+                <p>這個頁面使用了主應用的設計系統，您可以直接使用所有的 CSS 變數和樣式組件。請參考 design-system.css 瞭解更多可用的設計 tokens。</p>
+            </div>
+
+            <h3>如何新增靜態頁面</h3>
+            <ol>
+                <li>將您的完整 HTML 檔案放入對應的類別目錄（例如 pages/guides/）</li>
+                <li>在本地的 pages/_registry.js 中註冊頁面資訊（僅本地使用，不會推送到 GitHub）</li>
+                <li>透過本地的 pages/index.html 列表頁預覽和管理所有頁面</li>
+                <li>提交到 Git 時，只有靜態頁面本身會被推送，管理檔案保持在本地</li>
+            </ol>
+
+            <h3>使用設計系統</h3>
+            <p>您可以使用以下的設計系統元素：</p>
+            <ul>
+                <li>顏色變數：<code>var(--color-primary-600)</code>、<code>var(--color-neutral-700)</code> 等</li>
+                <li>字體大小：<code>var(--font-size-xl)</code>、<code>var(--font-size-lg)</code> 等</li>
+                <li>間距：<code>var(--spacing-4)</code>、<code>var(--spacing-8)</code> 等</li>
+                <li>圓角：<code>var(--border-radius-md)</code>、<code>var(--border-radius-lg)</code> 等</li>
+                <li>陰影：<code>var(--shadow-sm)</code>、<code>var(--shadow-lg)</code> 等</li>
+            </ul>
+
+            <h2>範例內容區塊</h2>
+            <p>以下展示一些常用的內容區塊樣式，您可以在自己的靜態頁面中使用。</p>
+
+            <h3>時間軸卡片樣式</h3>
+            <div class="timeline-card" style="margin: var(--spacing-4) 0;">
+                <h4 style="margin-bottom: var(--spacing-2);">卡片標題</h4>
+                <p style="margin-bottom: 0;">這是一個使用主應用設計系統的卡片樣式範例。您可以直接使用 <code>.timeline-card</code> 類別。</p>
+            </div>
+
+            <h3>程式碼區塊</h3>
+            <p>如果需要顯示程式碼，可以使用 <code>&lt;code&gt;</code> 標籤：</p>
+            <pre style="background: var(--color-neutral-100); padding: var(--spacing-4); border-radius: var(--border-radius-md); overflow-x: auto;">
+const example = {
+  title: '範例頁面',
+  category: '指南',
+  tags: ['範例', '教學']
+};</pre>
+
+            <h2>結語</h2>
+            <p>這個靜態頁面系統讓您可以輕鬆地管理和部署各種獨立的 HTML 內容，同時保持設計一致性和隱私保護。祝您使用愉快！</p>
+        </main>
+
+        <footer class="page-footer">
+            <p>© 2025 PeterLu | 2025日本東北之旅</p>
+        </footer>
+    </div>
+</body>
+</html>
