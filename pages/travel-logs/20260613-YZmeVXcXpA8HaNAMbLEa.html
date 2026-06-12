@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宜蘭羅東2日遊 · 6/13–6/14</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4ece0;
+    --paper-2:#ebe0cf;
+    --ink:#23383a;
+    --ink-soft:#4a605f;
+    --teal:#2c5d5b;
+    --teal-deep:#173536;
+    --coral:#c5512f;
+    --coral-soft:#d97a4e;
+    --sand:#caa14e;
+    --sage:#7e9374;
+    --line:#cdbfa8;
+    --card:#fbf6ec;
+    --shadow:0 18px 40px -22px rgba(23,53,54,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Noto Serif TC",serif;
+    color:var(--ink);
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(202,161,78,.10), transparent 42%),
+      radial-gradient(circle at 88% 92%, rgba(44,93,91,.12), transparent 48%);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    transition:background .4s ease;
+  }
+  /* 雨天模式：整體色調轉沉靜的雨綠 */
+  body.rain{
+    --paper:#e8ece8;
+    --paper-2:#dce3dc;
+    --card:#f4f7f2;
+    --line:#bcc8ba;
+  }
+  /* grain texture */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+  .wrap{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:0 22px 130px}
+
+  /* ---------- HERO ---------- */
+  header{
+    position:relative;padding:64px 0 38px;text-align:center;
+  }
+  .kicker{
+    font-family:"Fraunces",serif;font-style:italic;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;font-size:.82rem;
+    color:var(--coral);margin-bottom:14px;
+  }
+  h1{
+    font-family:"Noto Serif TC",serif;font-weight:900;
+    font-size:clamp(2.6rem,8vw,4.6rem);line-height:1.05;color:var(--teal-deep);
+    letter-spacing:.02em;
+  }
+  h1 .sea{color:var(--coral)}
+  .dates{
+    margin-top:18px;display:inline-flex;align-items:center;gap:14px;
+    font-family:"Fraunces",serif;font-weight:600;font-size:1.15rem;color:var(--ink-soft);
+  }
+  .dates span{display:inline-block;height:1px;width:46px;background:var(--line)}
+  .sub{margin-top:8px;color:var(--ink-soft);font-size:.95rem;letter-spacing:.04em}
+
+  /* ---------- QUICK FACTS ---------- */
+  .facts{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;margin:34px 0 8px;box-shadow:var(--shadow);
+  }
+  .fact{background:var(--card);padding:16px 12px;text-align:center}
+  .fact b{display:block;font-family:"Fraunces",serif;font-size:1.5rem;color:var(--teal);font-weight:900}
+  .fact small{display:block;font-size:.74rem;color:var(--ink-soft);letter-spacing:.08em;margin-top:3px}
+
+  /* ---------- TABS ---------- */
+  nav.tabs{
+    position:sticky;top:0;z-index:20;display:flex;gap:6px;flex-wrap:wrap;
+    justify-content:center;padding:14px 0;margin:24px -22px 0;
+    background:linear-gradient(var(--paper) 70%, transparent);
+  }
+  .tab{
+    font-family:"Fraunces",serif;font-weight:600;cursor:pointer;border:1px solid var(--line);
+    background:var(--card);color:var(--ink-soft);border-radius:999px;
+    padding:8px 16px;font-size:.9rem;transition:.25s;display:flex;flex-direction:column;
+    align-items:center;line-height:1.2;min-width:78px;
+  }
+  .tab small{font-family:"Noto Sans TC";font-size:.66rem;letter-spacing:.05em;opacity:.8}
+  .tab:hover{transform:translateY(-2px)}
+  .tab.active{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:var(--shadow)}
+  .tab.active small{opacity:.85}
+
+  /* ---------- DAY PANEL ---------- */
+  .day{display:none;animation:fade .5s ease}
+  .day.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+  .day-head{display:flex;align-items:flex-end;flex-wrap:wrap;gap:14px 18px;margin:36px 0 8px;padding-bottom:14px;border-bottom:2px solid var(--ink)}
+  .day-no{font-family:"Fraunces",serif;font-weight:900;font-size:3.4rem;line-height:.85;color:var(--coral)}
+  .day-head .t{flex:1}
+  .day-head .t h2{font-size:1.5rem;font-weight:900;color:var(--teal-deep)}
+  .day-head .t p{font-size:.86rem;color:var(--ink-soft);font-family:"Fraunces",serif;letter-spacing:.05em}
+
+  /* ---------- 晴天 / 雨天 行程切換 ---------- */
+  .plan-rain{display:none}
+  body.rain .plan-sun{display:none}
+  body.rain .plan-rain{display:block;animation:fade .5s ease}
+
+  .plan-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:24px 0 0}
+  .plan-tag{font-family:"Fraunces",serif;font-weight:600;font-size:.8rem;letter-spacing:.06em;
+    padding:4px 14px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
+  .plan-tag.sun{background:#f1ddc6;color:var(--coral)}
+  .plan-tag.rain{background:#d8e5e4;color:var(--teal)}
+
+  .wx{
+    position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:60;
+    display:flex;gap:4px;background:var(--card);border:1px solid var(--line);
+    border-radius:999px;padding:5px;box-shadow:0 14px 34px -12px rgba(23,53,54,.55);
+  }
+  .wx-btn{
+    font-family:"Noto Sans TC",sans-serif;font-weight:700;font-size:.88rem;
+    border:none;background:transparent;color:var(--ink-soft);border-radius:999px;
+    padding:9px 18px;cursor:pointer;transition:.25s;white-space:nowrap;
+  }
+  .wx-btn:hover{transform:translateY(-1px)}
+  .wx-btn.active[data-w="sun"]{background:var(--coral);color:#fff;box-shadow:0 6px 14px -6px rgba(197,81,47,.7)}
+  .wx-btn.active[data-w="rain"]{background:var(--teal);color:#fff;box-shadow:0 6px 14px -6px rgba(44,93,91,.7)}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative;margin:26px 0 0;padding-left:0}
+  .stop{position:relative;display:grid;grid-template-columns:64px 1fr;gap:16px;padding-bottom:8px}
+  .stop .time{
+    font-family:"Fraunces",serif;font-weight:600;font-size:1.02rem;color:var(--teal);
+    text-align:right;padding-top:14px;white-space:nowrap;
+  }
+  .rail{position:relative}
+  .rail::before{content:"";position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--line)}
+  .stop:last-child .rail::before{display:none}
+  .dot{position:absolute;left:0;top:16px;width:16px;height:16px;border-radius:50%;
+    background:var(--card);border:3px solid var(--teal);z-index:2}
+  .stop.move .dot{border-color:var(--line);width:12px;height:12px;left:2px;top:18px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:13px;
+    padding:13px 16px;margin-left:26px;box-shadow:0 8px 22px -18px rgba(23,53,54,.5);
+    position:relative;
+  }
+  .stop.move .card{background:transparent;border:none;box-shadow:none;padding:6px 16px;margin-left:26px}
+  .place{font-weight:700;font-size:1.08rem;color:var(--ink);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding-right:62px}
+  .place .badge{font-family:"Fraunces",serif;font-size:.66rem;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;padding:2px 8px;border-radius:6px;background:var(--paper-2);color:var(--ink-soft)}
+  .place .badge.eat{background:#f1ddc6;color:var(--coral)}
+  .place .badge.move-b{background:#dfe8df;color:var(--sage)}
+  .place .badge.stay{background:#dce8e7;color:var(--teal)}
+  .place .badge.alt{background:#d8e5e4;color:var(--teal)}
+  .addr{font-family:"Noto Sans TC";font-size:.82rem;color:var(--ink-soft);margin-top:3px}
+  .notes{font-size:.88rem;color:var(--ink-soft);margin-top:7px}
+  .notes .k{color:var(--coral);font-weight:600}
+  .move-text{font-family:"Noto Sans TC";font-size:.82rem;color:var(--ink-soft)}
+  .dur{display:inline-block;font-family:"Fraunces",serif;font-size:.72rem;color:var(--sage);
+    border:1px solid var(--line);border-radius:999px;padding:1px 9px;margin-left:4px}
+  .bus{display:inline-block;font-family:"Noto Sans TC";font-size:.78rem;background:#eadfca;color:var(--ink-soft);
+    border-radius:6px;padding:1px 7px;margin:2px 4px 0 0}
+  .maplink{position:absolute;top:10px;right:12px;z-index:3;display:inline-flex;align-items:center;gap:3px;
+    font-family:"Noto Sans TC";font-size:.74rem;font-weight:500;color:var(--teal);text-decoration:none;
+    border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 11px 5px 9px;
+    transition:.2s;white-space:nowrap;box-shadow:0 3px 8px -5px rgba(23,53,54,.5)}
+  .maplink:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .maplink:active{transform:scale(.95)}
+  .maplink svg{flex:0 0 auto}
+  .routebtn{margin-left:auto;align-self:center;font-family:"Fraunces",serif;font-weight:600;font-size:.84rem;
+    cursor:pointer;display:inline-flex;align-items:center;gap:6px;background:var(--coral);color:#fff;
+    text-decoration:none;border:none;border-radius:999px;padding:8px 16px;box-shadow:var(--shadow);transition:.2s}
+  .routebtn:hover{background:#a8421f;transform:translateY(-2px)}
+  .routebtn svg{flex:0 0 auto}
+  .stop.is-stay .card{background:#f8f0e1;border-color:#e6d6af}
+  .stop.is-stay .dot{background:var(--sand);border-color:var(--sand);box-shadow:0 0 0 4px rgba(202,161,78,.20)}
+  .stop.is-train .card{background:#f9e9e0;border-color:#ecccbc}
+  .stop.is-train .dot{background:var(--coral);border-color:var(--coral);box-shadow:0 0 0 4px rgba(197,81,47,.16)}
+
+  /* ---------- PREP CALLOUT ---------- */
+  .prep{
+    background:linear-gradient(150deg,var(--teal-deep),var(--teal));color:#f4ece0;
+    border-radius:18px;padding:28px 26px;margin:22px 0 8px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .prep::after{content:"羅東";position:absolute;right:-6px;bottom:-28px;font-family:"Noto Serif TC";
+    font-weight:900;font-size:6rem;color:rgba(255,255,255,.06);letter-spacing:.05em}
+  .prep h3{font-size:1.35rem;font-weight:900;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+  .prep .lead{font-size:.86rem;opacity:.85;margin-bottom:18px;font-family:"Fraunces",serif;letter-spacing:.04em}
+  .prep ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
+  .prep li{font-size:.9rem;display:flex;gap:10px;align-items:flex-start;line-height:1.55}
+  .prep li i{font-style:normal;font-family:"Fraunces",serif;font-weight:900;color:var(--sand);flex:0 0 auto}
+  .prep li.warn i{color:var(--coral-soft)}
+  .prep .ban{margin-top:18px;background:rgba(197,81,47,.22);border:1px solid rgba(217,122,78,.5);
+    border-radius:10px;padding:11px 14px;font-size:.88rem;position:relative;z-index:2}
+
+  /* ---------- FOOD LIST ---------- */
+  .food-cat{margin-top:26px}
+  .food-cat > h3{font-size:1.18rem;font-weight:900;color:var(--teal-deep);margin-bottom:4px;
+    display:flex;align-items:center;gap:8px}
+  .food-cat > p.cat-note{font-size:.84rem;color:var(--ink-soft);font-family:"Noto Sans TC";margin-bottom:12px}
+  .food-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .food-grid .card{margin-left:0}
+  .food-grid .card .place{font-size:1rem}
+  .star{color:var(--coral);font-weight:900}
+
+  /* ---------- FOOTER NOTE ---------- */
+  .pnote{margin-top:30px;border:1px dashed var(--line);border-radius:13px;padding:16px 18px;
+    background:var(--card);font-size:.86rem;color:var(--ink-soft)}
+  .pnote b{color:var(--coral)}
+  footer{text-align:center;margin-top:54px;color:var(--ink-soft);font-size:.78rem;font-family:"Fraunces",serif;letter-spacing:.06em}
+  footer .wave{font-size:1.4rem;color:var(--teal)}
+
+  /* ---- 打包清單 ---- */
+  .pack-intro{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;margin:22px 0 6px;font-size:.9rem;color:var(--ink-soft);line-height:1.6}
+  .pack-intro b{color:var(--coral)}
+  .pack-bar-wrap{display:flex;align-items:center;gap:14px;margin:22px 0 10px}
+  .pack-bar-wrap .lbl{font-family:"Fraunces",serif;font-weight:600;font-size:.9rem;color:var(--teal);white-space:nowrap}
+  .pack-bar{flex:1;height:9px;background:var(--paper-2);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .pack-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sand),var(--teal));
+    border-radius:999px;transition:width .35s ease}
+  .pack-reset{font-family:"Noto Sans TC";font-size:.78rem;color:var(--ink-soft);cursor:pointer;
+    border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;transition:.2s}
+  .pack-reset:hover{background:var(--coral);color:#fff;border-color:var(--coral)}
+  .pack-cat{margin-top:24px}
+  .pack-cat > h3{font-size:1.18rem;font-weight:900;color:var(--teal-deep);margin-bottom:12px;
+    display:flex;align-items:center;gap:8px}
+  .pack-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border:1px solid var(--line);
+    border-radius:12px;background:var(--card);margin-bottom:8px;cursor:pointer;transition:.18s;user-select:none}
+  .pack-item:hover{border-color:var(--teal);transform:translateX(2px)}
+  .pack-item .box{flex:0 0 auto;width:21px;height:21px;border:2px solid var(--teal);border-radius:6px;
+    display:grid;place-items:center;margin-top:1px;transition:.18s}
+  .pack-item .box svg{width:13px;height:13px;opacity:0;transform:scale(.4);transition:.18s;color:#fff}
+  .pack-item .lbl{font-size:.96rem;line-height:1.45;font-weight:600;color:var(--ink)}
+  .pack-item .lbl small{display:block;font-family:"Noto Sans TC";font-size:.78rem;color:var(--ink-soft);font-weight:400;margin-top:1px}
+  .pack-item.done{background:#eceee7;border-color:#d9d3c2}
+  .pack-item.done .box{background:var(--teal);border-color:var(--teal)}
+  .pack-item.done .box svg{opacity:1;transform:scale(1)}
+  .pack-item.done .lbl{color:var(--ink-soft);text-decoration:line-through;opacity:.65}
+  .pack-cat.feature{background:linear-gradient(150deg,var(--teal-deep),var(--teal));border-radius:18px;
+    padding:22px 22px 16px;color:#f4ece0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .pack-cat.feature::after{content:"羅東";position:absolute;right:-6px;bottom:-26px;font-family:"Noto Serif TC";
+    font-weight:900;font-size:5.5rem;color:rgba(255,255,255,.06)}
+  .pack-cat.feature > h3{color:#fff;position:relative;z-index:2}
+  .pack-cat.feature .pack-item{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);position:relative;z-index:2}
+  .pack-cat.feature .pack-item:hover{border-color:var(--sand)}
+  .pack-cat.feature .pack-item .box{border-color:var(--sand)}
+  .pack-cat.feature .pack-item .lbl{color:#f4ece0}
+  .pack-cat.feature .pack-item .lbl small{color:rgba(244,236,224,.72)}
+  .pack-cat.feature .pack-item.done{background:rgba(255,255,255,.04)}
+  .pack-cat.feature .pack-item.done .box{background:var(--sand);border-color:var(--sand)}
+  .pack-cat.feature .pack-item.done .lbl{color:rgba(244,236,224,.55)}
+
+  @media(max-width:600px){
+    .facts{grid-template-columns:repeat(2,1fr)}
+    .prep ul{grid-template-columns:1fr}
+    .food-grid{grid-template-columns:1fr}
+    .stop{grid-template-columns:48px 1fr;gap:10px}
+    .card,.stop.move .card{margin-left:18px}
+    h1{font-size:2.7rem}
+    .wx-btn{padding:9px 14px;font-size:.84rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Yilan · Luodong Getaway</div>
+    <h1>宜蘭<span class="sea">羅東</span>二日遊</h1>
+    <div class="dates"><span></span>2026 · 6/13 — 6/14<span></span></div>
+    <div class="sub">兩天一夜 · 機車漫遊 · 稻浪 湖畔 夜市 · 佩希＆恩承</div>
+
+    <div class="facts">
+      <div class="fact"><b>2</b><small>天 DAYS</small></div>
+      <div class="fact"><b>2</b><small>人 PEOPLE</small></div>
+      <div class="fact"><b>GP-125</b><small>威力租車 $700/2天</small></div>
+      <div class="fact"><b>06:30</b><small>市政府見面・首都客運</small></div>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <div class="tab active" data-day="1">6/13<small>林場・傳藝・稻浪</small></div>
+    <div class="tab" data-day="2">6/14<small>湖畔・茶園・甜點</small></div>
+    <div class="tab" data-day="3">美食<small>夜市・餐廳</small></div>
+    <div class="tab" data-day="4">清單<small>打包・待確認</small></div>
+  </nav>
+
+  <!-- ================= DAY 1 ================= -->
+  <section class="day show" data-day="1">
+    <div class="day-head">
+      <div class="day-no">01</div>
+      <div class="t"><h2>羅東林場・傳藝・三奇稻浪</h2><p>SAT · 6 / 13 — 出門玩黑皮囉！不能餓到，要吃吃吃</p></div>
+    </div>
+
+    <!-- PREP CALLOUT -->
+    <div class="prep">
+      <h3>🛵 機車租借 · 行前準備</h3>
+      <div class="lead">Mober 威力租車 · GP-125 · $700 / 2 天</div>
+      <ul>
+        <li><i>1</i><span><b>已預訂完成 ✅</b>（mober 線上預訂，06/13–06/14）</span></li>
+        <li class="warn"><i>2</i><span><b>雙證件必帶</b>：駕照＋身分證（租車、住宿登記都要）</span></li>
+        <li><i>3</i><span>最早 <b>08:30</b> 取車；客運 07:30 抵達，可先吃早餐再取車</span></li>
+        <li><i>4</i><span>CP 值高：含<b>安全帽、手機架、輕便雨衣</b></span></li>
+        <li><i>5</i><span>騎車用 Google Maps 導航，記得帶行動電源</span></li>
+        <li><i>6</i><span>晚上騎車會涼，帶件薄外套</span></li>
+      </ul>
+      <div class="ban">⛑️ 最重要：<b>安全第一</b>，騎車多注意四方，開心出門、<b>平安回家</b>！</div>
+    </div>
+
+    <!-- ===== 晴天版 ===== -->
+    <div class="plan plan-sun">
+      <div class="plan-bar"><span class="plan-tag sun">☀️ 正常行程</span></div>
+      <div class="timeline">
+
+        <div class="stop"><div class="time">06:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">首都客運 市政府轉運站 → 羅東 <span class="badge">客運</span></div>
+          <div class="notes"><span class="k">06:30 市政府轉運站見面</span>，買票選最近的班次，車程約 1 小時。<span class="dur">1h</span></div></div></div></div>
+
+        <div class="stop"><div class="time">07:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">抵達羅東轉運站</div>
+          <div class="notes">拖行李準備出發，緩衝上廁所、整裝。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 步行約 13 分<span class="dur">13 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">08:15</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">布朗奇早午餐 <span class="badge eat">早餐</span></div>
+          <div class="addr">宜蘭縣羅東鎮黎明街40號</div>
+          <div class="notes">06:00 開到 14:00，慢慢吃到 08:50。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 步行約 7 分<span class="dur">7 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">09:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">羅東林業文化園區</div>
+          <div class="addr">宜蘭縣羅東鎮中正北路118號</div>
+          <div class="notes">逛到 10:15：環湖步道、貯木池、森產館。日治太平山林場貯木池舊址。<span class="k">小黑蚊多，記得擦防蚊液</span>。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 步行約 11 分（穿越前後站）<span class="dur">11 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">10:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">威力租車 Mober 取機車 <span class="badge move-b">租車</span></div>
+          <div class="addr">宜蘭縣羅東鎮公正路2號</div>
+          <div class="notes"><span class="k">帶駕照、身分證</span>。GP-125，$700 / 2 天。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 3 分<span class="dur">3 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">10:35</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">優宿商旅 寄放行李 <span class="badge stay">住宿 6/13</span></div>
+          <div class="addr">宜蘭縣羅東鎮公正路121號</div>
+          <div class="notes">10 點後可放東西，<span class="k">寄放即可，不進房</span>。Check-in 15:00 後、Check-out 隔天 11:00 前；入住時出示證件並繳住宿費。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 14 分<span class="dur">14 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">11:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">國立傳統藝術中心（上半場） <span class="badge">門票</span></div>
+          <div class="addr">宜蘭縣五結鄉五濱路二段201號</div>
+          <div class="notes">先逛仿古老街、看表演，逛到 12:30。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 3 分（出園區到清水三巷）<span class="dur">3 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">12:35</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">豐盛小館 <span class="badge eat">午餐</span></div>
+          <div class="addr">宜蘭縣五結鄉清水三巷</div>
+          <div class="notes"><span class="k">蔥油拌麵、雞絲飯</span>，吃到 13:30。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 3 分，騎回傳藝<span class="dur">3 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">13:35</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">傳藝中心（下半場・選逛）</div>
+          <div class="notes">補逛沒看完的、<span class="k">買伴手禮</span>，14:00 出發。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 12 分<span class="dur">12 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">14:15</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">三奇稻間美徑（宜蘭版伯朗大道） 🌾</div>
+          <div class="addr">宜蘭縣冬山鄉三奉路77號（導航三奇奉尊宮）</div>
+          <div class="notes">機車停車費 20 元。6 月稻浪正美、<span class="k">6/13–6/14 剛好有活動</span>！拍照打卡到 15:00。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 7 分<span class="dur">7 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">15:10</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">小華村純米手作粿店 <span class="badge eat">點心</span></div>
+          <div class="addr">宜蘭縣冬山鄉</div>
+          <div class="notes">茶香麻糬、草仔粿、蘿蔔糕，內用或外帶都可，待到 15:40。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 14 分，騎回羅東<span class="dur">14 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">15:55</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">優宿商旅 正式 Check-in <span class="badge stay">住宿</span></div>
+          <div class="notes">沖個澡放鬆，休息到 16:30 之後。</div></div></div></div>
+
+        <div class="stop"><div class="time">17:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">羅東夜市 <span class="badge eat">晚餐</span></div>
+          <div class="notes">旅館旁邊步行 1 分！阿灶伯當歸羊肉、嚐味鮮湯包、<span class="k">北門綠豆沙牛乳（我要喝！）</span>⋯⋯口袋名單見「美食」分頁。</div></div></div></div>
+
+      </div>
+    </div>
+
+    <!-- ===== 雨天版 ===== -->
+    <div class="plan plan-rain">
+      <div class="plan-bar"><span class="plan-tag rain">🌧️ 雨天行程</span></div>
+      <div class="timeline">
+
+        <div class="stop"><div class="time">06:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">首都客運 市政府轉運站 → 羅東 <span class="badge">客運</span></div>
+          <div class="notes"><span class="k">06:30 市政府轉運站見面</span>，買票選最近的班次，車程約 1 小時。<span class="dur">1h</span></div></div></div></div>
+
+        <div class="stop"><div class="time">07:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">布朗奇早午餐 <span class="badge eat">早餐</span></div>
+          <div class="addr">宜蘭縣羅東鎮黎明街40號</div>
+          <div class="notes">抵達後步行過去（約 13 分），慢慢吃到 08:30。</div></div></div></div>
+
+        <div class="stop"><div class="time">08:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">威力租車 Mober 取機車 <span class="badge move-b">租車</span></div>
+          <div class="addr">宜蘭縣羅東鎮公正路2號</div>
+          <div class="notes">08:30 準時取車，<span class="k">記得穿上店家附的輕便雨衣</span>。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 3 分<span class="dur">3 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">08:45</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">優宿商旅 寄放行李 <span class="badge stay">住宿 6/13</span></div>
+          <div class="addr">宜蘭縣羅東鎮公正路121號</div>
+          <div class="notes">寄放背包，不進房。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 7 分<span class="dur">7 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">09:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">中興文化創意園區 <span class="badge alt">雨備替代</span></div>
+          <div class="addr">宜蘭縣五結鄉中正路二段6之8號</div>
+          <div class="notes">🔄 <span class="k">替代林業園區</span>。舊紙廠改建，室內空間極大，文創小店、廢墟風室內拍照點，完全淋不到雨。逛到 10:30。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 15 分，<b>雨天減速慢行，注意安全！</b><span class="dur">15 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">11:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">國立傳統藝術中心（上半場） <span class="badge">門票</span></div>
+          <div class="addr">宜蘭縣五結鄉五濱路二段201號</div>
+          <div class="notes">走仿古老街的<span class="k">騎樓下完全不怕雨</span>，可以先看室內傳統戲曲表演，到 12:30。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 3 分<span class="dur">3 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">12:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">豐盛小館 <span class="badge eat">午餐</span></div>
+          <div class="addr">宜蘭縣五結鄉清水三巷</div>
+          <div class="notes">蔥油拌麵、雞絲飯，吃到 13:30。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 3 分，騎回傳藝<span class="dur">3 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">13:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">傳藝中心（下半場・DIY）</div>
+          <div class="notes">下午留在這裡體驗<span class="k">傳統技藝 DIY</span>（椪糖、皮革、捏麵人等），一起做很有紀念價值，也可以趁機拍室內 Dress code 合照。待到 15:30。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 10 分<span class="dur">10 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">15:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">小華村純米手作粿店 <span class="badge eat">點心</span></div>
+          <div class="addr">宜蘭縣冬山鄉</div>
+          <div class="notes">買茶香麻糬、草仔粿當下午茶點心（可外帶回旅館吃）。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 14 分，騎回羅東<span class="dur">14 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">16:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">優宿商旅 Check-in <span class="badge stay">住宿</span></div>
+          <div class="notes">回房<span class="k">洗個熱水澡、吹乾衣服</span>，休息到 17:00。</div></div></div></div>
+
+        <div class="stop"><div class="time">17:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">羅東夜市 或 備案餐廳 <span class="badge eat">晚餐</span></div>
+          <div class="notes">旅館就在旁邊步行 1 分。雨大就挑騎樓、室內店家；備案餐廳見「美食」分頁。</div></div></div></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DAY 2 ================= -->
+  <section class="day" data-day="2">
+    <div class="day-head">
+      <div class="day-no">02</div>
+      <div class="t"><h2>梅花湖・茶園・甜點返程</h2><p>SUN · 6 / 14 — 湖光山色，吃飽喝足搭車回家</p></div>
+    </div>
+
+    <!-- ===== 晴天版 ===== -->
+    <div class="plan plan-sun">
+      <div class="plan-bar"><span class="plan-tag sun">☀️ 正常行程</span></div>
+      <div class="timeline">
+
+        <div class="stop"><div class="time">08:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">嗄嗄叫蛋餅 <span class="badge eat">早餐</span></div>
+          <div class="addr">宜蘭縣羅東鎮興東路78號</div>
+          <div class="notes">旅館步行 2 分超近。現點現煎手工蛋餅，<span class="k">必點豬排蛋餅</span>。吃到 08:50。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 3 分（園區有停車格）<span class="dur">3 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">09:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">羅東文化工場</div>
+          <div class="addr">宜蘭縣羅東鎮純精路一段96號</div>
+          <div class="notes">巨型太空船建築，看建築、藝廊、頂樓平台，逛到 09:45。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 3 分，騎回旅館<span class="dur">3 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">09:50</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">旅館休息＋整理行李 <span class="badge stay">退房</span></div>
+          <div class="notes">退房前充分休息；10:30–11:00 退房，<span class="k">行李寄旅館</span>（下午回來再拿）。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 14 分<span class="dur">14 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">11:15</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">梅花湖風景區 環湖步行 🚶</div>
+          <div class="addr">宜蘭縣冬山鄉環湖路</div>
+          <div class="notes">順時針環湖約 4 公里，看湖、餵魚、拍照，走到 12:45。也可租協力車或搭船遊湖。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 1 分（就在湖邊旁）<span class="dur">1 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">12:50</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">饗約烤魚 <span class="badge eat">午餐</span></div>
+          <div class="addr">宜蘭縣冬山鄉（梅花湖旁）</div>
+          <div class="notes"><span class="k">鹽烤魚、炸蘑菇必點</span>，吃到 14:00。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 5 分<span class="dur">5 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">14:05</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">中山茶園步道 🍃</div>
+          <div class="addr">宜蘭縣冬山鄉三清路123號（導航三清宮）</div>
+          <div class="notes">步道約 1.36 公里，走到<span class="k">中山亭觀景平台</span>，鳥瞰蘭陽平原、龜山島與海。走到 15:00。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 12 分<span class="dur">12 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">15:15</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">無牙甜點 <span class="badge eat">下午茶</span></div>
+          <div class="addr">宜蘭縣羅東鎮</div>
+          <div class="notes"><span class="k">提拉米蘇、千層蛋糕</span>，悠閒吃到 16:15。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 3 分，騎回旅館<span class="dur">3 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">16:20</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">拿行李・還車・彈性時間</div>
+          <div class="notes">回旅館拿行李，<span class="k">去威力租車還車</span>，休息整理到 18:00。</div></div></div></div>
+
+        <div class="stop"><div class="time">18:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">拾松 <span class="badge eat">晚餐</span></div>
+          <div class="addr">宜蘭縣羅東鎮</div>
+          <div class="notes">宜蘭古早味辦桌小吃：<span class="k">糕渣、西魯肉、糟餅、干貝芋粿、古早味芋泥</span>。</div></div></div></div>
+
+        <div class="stop"><div class="time">22:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">首都客運 羅東轉運站 → 市政府 <span class="badge">客運</span></div>
+          <div class="notes">22:00 發車，23:00 抵達市政府。平安回家！🏠<span class="dur">1h</span></div></div></div></div>
+
+      </div>
+    </div>
+
+    <!-- ===== 雨天版 ===== -->
+    <div class="plan plan-rain">
+      <div class="plan-bar"><span class="plan-tag rain">🌧️ 雨天行程</span></div>
+      <div class="timeline">
+
+        <div class="stop"><div class="time">08:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">嗄嗄叫蛋餅 <span class="badge eat">早餐</span></div>
+          <div class="addr">宜蘭縣羅東鎮興東路78號</div>
+          <div class="notes">旅館走過去超近，慢慢享用現點現煎的<span class="k">豬排蛋餅</span>，吃到 08:50。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 3 分<span class="dur">3 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">09:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">羅東文化工場</div>
+          <div class="addr">宜蘭縣羅東鎮純精路一段96號</div>
+          <div class="notes">巨大棚架與太空船建築<span class="k">本身就可以擋雨</span>，二樓有室內藝廊展覽；通往二樓的長梯有遮蔽，是經典雨天拍點。逛到 10:30。</div></div></div></div>
+
+        <div class="stop"><div class="time">10:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">回旅館收拾＋退房 <span class="badge stay">退房</span></div>
+          <div class="notes">行李先寄放櫃檯，11:30 出發。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 8 分<span class="dur">8 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">11:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">美拍玩很大 OMG! 畫框博物館 <span class="badge alt">雨備替代</span></div>
+          <div class="addr">宜蘭縣五結鄉</div>
+          <div class="notes">🔄 <span class="k">替代梅花湖與步道</span>。全室內景點，超多立體畫框、KUSO 場景、闖關遊戲，還有免費畫框 DIY，適合情侶拍照玩變裝。玩到 13:00。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 12 分<span class="dur">12 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">13:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">饗約烤魚 <span class="badge eat">午餐</span></div>
+          <div class="addr">宜蘭縣冬山鄉（梅花湖旁）</div>
+          <div class="notes">吃到 14:30。<span class="k">雨太大可改市區餐廳</span>：詠壽司／伊丼日式丼飯／水沐食堂。</div></div></div></div>
+
+        <div class="stop move"><div class="time"></div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="move-text">↓ 機車約 12 分，<b>吃飽飽，小心騎回市區</b><span class="dur">12 min</span></div></div></div></div>
+
+        <div class="stop"><div class="time">15:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">無牙甜點 <span class="badge eat">下午茶</span></div>
+          <div class="addr">宜蘭縣羅東鎮</div>
+          <div class="notes">待在室內吃<span class="k">千層蛋糕跟提拉米蘇</span>，躲雨兼聊天，到 16:30。</div></div></div></div>
+
+        <div class="stop"><div class="time">16:30</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">還車・拿行李・休息</div>
+          <div class="notes">回旅館拿行李，去威力租車還車，到 18:00。</div></div></div></div>
+
+        <div class="stop"><div class="time">18:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">拾松 <span class="badge eat">晚餐</span></div>
+          <div class="addr">宜蘭縣羅東鎮</div>
+          <div class="notes">還車後就在轉運站／火車站附近散步，晚餐吃<span class="k">拾松</span>古早味辦桌小吃，悠閒待到 21:30。</div></div></div></div>
+
+        <div class="stop"><div class="time">22:00</div><div class="rail"><div class="dot"></div>
+          <div class="card"><div class="place">首都客運 羅東轉運站 → 市政府 <span class="badge">客運</span></div>
+          <div class="notes">22:00 發車，23:00 抵達市政府。平安回家！🏠<span class="dur">1h</span></div></div></div></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOD ================= -->
+  <section class="day" data-day="3">
+    <div class="day-head">
+      <div class="day-no">🍜</div>
+      <div class="t"><h2>美食口袋名單</h2><p>FOOD LIST — 不能餓到，要吃吃吃</p></div>
+    </div>
+
+    <div class="food-cat">
+      <h3>🍳 早餐／早午餐</h3>
+      <div class="food-grid">
+        <div class="card"><div class="place">布朗奇早午餐 <span class="badge eat">Day 1</span></div>
+          <div class="addr">宜蘭縣羅東鎮黎明街40號</div>
+          <div class="notes">06:00–14:00，轉運站步行 13 分。</div></div>
+        <div class="card"><div class="place">嗄嗄叫蛋餅 <span class="badge eat">Day 2</span></div>
+          <div class="addr">宜蘭縣羅東鎮興東路78號</div>
+          <div class="notes">現點現煎手工蛋餅，肉排醬料自家醃製。週六日 06:00–15:00。</div></div>
+        <div class="card"><div class="place">無名油飯</div>
+          <div class="addr">宜蘭縣羅東鎮純精路二段36號</div>
+          <div class="notes">只賣油飯和魚丸湯，熱賣 20 多年。<span class="k">週日休</span>，想吃要 Day 1。</div></div>
+      </div>
+    </div>
+
+    <div class="food-cat">
+      <h3>🍱 餐廳備案（先放不一定要吃）</h3>
+      <div class="food-grid">
+        <div class="card"><div class="place">拾松 <span class="badge eat">Day 2 晚餐</span></div>
+          <div class="notes">宜蘭古早味辦桌小吃：糕渣、西魯肉、糟餅、干貝芋粿、古早味芋泥。</div></div>
+        <div class="card"><div class="place">EncoreTable 安口餐桌</div>
+          <div class="notes">朋友推薦<span class="k">鴨胸</span>。</div></div>
+        <div class="card"><div class="place">詠壽司</div>
+          <div class="notes">日式料理。</div></div>
+        <div class="card"><div class="place">伊丼日式丼飯</div>
+          <div class="notes">綠色餐廳標章，雙醬唐揚雞丼、黃金活菌豬排丼。</div></div>
+        <div class="card"><div class="place">水沐食堂</div>
+          <div class="notes">市區備案。</div></div>
+        <div class="card"><div class="place">食至名龜</div>
+          <div class="notes">羅東夜市周邊精緻餐廳。</div></div>
+      </div>
+    </div>
+
+    <div class="food-cat">
+      <h3>🍧 冬山鄉特色美食／咖啡廳</h3>
+      <div class="food-grid">
+        <div class="card"><div class="place">刀山臭豆腐</div>
+          <div class="addr">宜蘭縣冬山鄉</div>
+          <div class="notes">距梅花湖 3 分鐘車程，四層厚豆腐「金字塔」酥炸三次，外酥內嫩，刀梯油鍋拍照梗超多。</div></div>
+        <div class="card"><div class="place">浪花丸（剉冰）</div>
+          <div class="notes">沖繩風<span class="k">小熊剉冰</span>，超萌超好拍，6 月吃冰剛剛好。</div></div>
+        <div class="card"><div class="place">小華村純米手作粿店 <span class="badge eat">Day 1</span></div>
+          <div class="notes">茶香麻糬、草仔粿、蘿蔔糕，連邰哥都推的 IG 名店。</div></div>
+        <div class="card"><div class="place">饗約烤魚 <span class="badge eat">Day 2 午餐</span></div>
+          <div class="notes">梅花湖旁，鹽烤魚、炸蘑菇必點。</div></div>
+        <div class="card"><div class="place">無牙甜點 <span class="badge eat">Day 2 下午茶</span></div>
+          <div class="notes">提拉米蘇、千層蛋糕。</div></div>
+      </div>
+    </div>
+
+    <div class="food-cat">
+      <h3>🏮 羅東夜市</h3>
+      <p class="cat-note">中山公園周邊（公園路、民生路、公正路、興東路），約 15:00 營業到午夜。旅館步行 1 分！</p>
+      <div class="food-grid">
+        <div class="card"><div class="place">北門綠豆沙牛乳 <span class="star">★ 我要喝！</span></div></div>
+        <div class="card"><div class="place">阿灶伯當歸羊肉</div>
+          <div class="notes">排隊名店，羊肉湯滿滿羊肉片沾微辣豆瓣，臭豆腐也必點。</div></div>
+        <div class="card"><div class="place">嚐味鮮湯包</div>
+          <div class="notes">三星蔥爆漿湯包、起司湯包必點，皮薄多汁。</div></div>
+        <div class="card"><div class="place">財記臭豆腐</div>
+          <div class="notes">起司臭豆腐堡每日限量 50 個、脆皮臭豆腐外酥內嫩。</div></div>
+        <div class="card"><div class="place">王老吉滷味</div>
+          <div class="notes">每日排隊半小時起跳，獨家酸菜＋辣椒醬超開胃。</div></div>
+        <div class="card"><div class="place">玉本舖三星蔥餅</div></div>
+        <div class="card"><div class="place">羊舖子</div>
+          <div class="notes">另一家羊肉湯名店，肉質更有嚼勁。</div></div>
+        <div class="card"><div class="place">義豐蔥油派</div>
+          <div class="notes">老字號三星蔥油餅。</div></div>
+        <div class="card"><div class="place">阿公仔龍鳳腿春捲</div>
+          <div class="notes">超過 60 年銅板美食，龍鳳腿 6 支 100 元。</div></div>
+        <div class="card"><div class="place">魏姐包心粉圓</div>
+          <div class="notes">甜湯收尾首選。</div></div>
+        <div class="card"><div class="place">章魚小丸子</div></div>
+        <div class="card"><div class="place">龘烤肉</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PACKING / TODO ================= -->
+  <section class="day" data-day="4">
+    <div class="day-head">
+      <div class="day-no">🎒</div>
+      <div class="t"><h2>打包清單・待確認</h2><p>CHECKLIST — 點一下打勾，出發前邊收邊確認</p></div>
+    </div>
+
+    <div class="pack-intro">
+      🌤️ <b>天氣重點</b>：6 月宜蘭白天偏熱要防曬，午後可能有雷陣雨；<b>晚上騎車會涼，帶件薄外套</b>。
+      雨天模式行程已備好，出發前看天氣用下方按鈕切換。最重要：<b>安全第一，騎車多注意四方，開心出門、平安回家！</b>
+    </div>
+
+    <div class="pack-bar-wrap">
+      <span class="lbl">已打包 <span id="packCount">0 / 0</span></span>
+      <div class="pack-bar"><i id="packBar"></i></div>
+      <span class="pack-reset" id="packReset">重設</span>
+    </div>
+
+    <div class="pack-cat feature">
+      <h3>🛵 證件・租車必帶（最重要）</h3>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">身分證 ‼️<small>租機車＋旅館登記都要</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">機車駕照 ‼️<small>雙證件缺一不可</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">現金＋信用卡<small>住宿費入住時現場繳</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">悠遊卡<small>首都客運來回</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">行動電源＋充電線<small>騎車全程 Google Maps 導航很耗電</small></div></div>
+    </div>
+
+    <div class="pack-cat">
+      <h3>🧴 防曬・防蚊</h3>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">防曬乳<small>6 月宜蘭白天偏熱</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">太陽眼鏡</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">防蚊液<small>林業園區小黑蚊多</small></div></div>
+    </div>
+
+    <div class="pack-cat">
+      <h3>👕 衣物・雨具</h3>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">換洗衣物</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">⬛ 黑色穿搭<small>Day 1 Dress code</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">🍃 淺綠色穿搭<small>Day 2 Dress code</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">薄外套<small>晚上騎車可能會涼</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">輕便雨衣<small>mober 有附，自帶一件備用更安心</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">好走的鞋<small>梅花湖環湖 4km＋茶園步道 1.36km</small></div></div>
+    </div>
+
+    <div class="pack-cat">
+      <h3>🔌 其他</h3>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">手機架<small>mober 有附，騎車導航用</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">盥洗用品・保養品</div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">環保購物袋<small>傳藝伴手禮、小華村外帶</small></div></div>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">零錢<small>三奇美徑機車停車費 $20</small></div></div>
+    </div>
+
+    <div class="pack-cat">
+      <h3>❓ 待確認</h3>
+      <div class="pack-item"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="lbl">情侶合照動作<small>先想好幾個 pose，三奇美徑＋傳藝用得上</small></div></div>
+    </div>
+  </section>
+
+  <div class="pnote">
+    📌 <b>小提醒</b>：① 出門玩黑皮囉！<b>不能餓到，要吃吃吃</b>　② 北門綠豆沙牛乳（<b>我要喝！</b>）　③ <b>安全第一</b>，騎車多注意四方，開心出門、平安回家
+  </div>
+
+  <footer>
+    <div class="wave">〜〜〜</div>
+    宜蘭 · 羅東 · 冬山　2026.6.13 – 6.14
+  </footer>
+
+</div>
+
+<!-- 晴天 / 雨天 切換按鈕 -->
+<div class="wx" id="wx" role="group" aria-label="行程版本切換">
+  <button class="wx-btn active" data-w="sun">☀️ 正常行程</button>
+  <button class="wx-btn" data-w="rain">🌧️ 雨天行程</button>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const days = document.querySelectorAll('.day');
+  tabs.forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      const d = tab.dataset.day;
+      tabs.forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      days.forEach(s=>s.classList.toggle('show', s.dataset.day===d));
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+
+  /* ---- 晴天 / 雨天 行程切換 ---- */
+  const WKEY = 'luodong_weather_v1';
+  const wxBtns = document.querySelectorAll('.wx-btn');
+  function setWeather(w, save){
+    document.body.classList.toggle('rain', w === 'rain');
+    wxBtns.forEach(b=>b.classList.toggle('active', b.dataset.w === w));
+    if(save){ try { localStorage.setItem(WKEY, w); } catch(e){} }
+  }
+  wxBtns.forEach(b=>b.addEventListener('click', ()=>setWeather(b.dataset.w, true)));
+  try { const w = localStorage.getItem(WKEY); if(w==='rain') setWeather('rain', false); } catch(e){}
+
+  /* ---- Google Maps：地點連結 + 每段行程整日路線 + 住宿/車站標記 ---- */
+  const skip = ['出發','抵達','退房','還車','拿行李','收拾','彈性','休息','溫暖的家','→','整理'];
+  const addrHints = ['號','路','街','巷','大道','鄉','村','里','段'];
+  const clean = t => t.replace(/[🌾🚶🍃🏠🏮📍★‼️!？?]/g,'').replace(/\s+/g,' ').trim();
+  const pinSvg = '<svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor">'
+    + '<path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5'
+    + 'A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>';
+  const routeSvg = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" '
+    + 'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+    + '<circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="5" r="2.4"/>'
+    + '<path d="M8.4 19H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.6"/></svg>';
+
+  function placeQuery(card){
+    const placeEl = card.querySelector('.place');
+    if(!placeEl) return null;
+    const tmp = placeEl.cloneNode(true);
+    tmp.querySelectorAll('.badge,.star').forEach(b=>b.remove());
+    const name = clean(tmp.textContent);
+    if(!name) return null;
+    if(skip.some(s=>name.includes(s))) return null;
+    let query = name;
+    const addrEl = card.querySelector('.addr');
+    if(addrEl){
+      const addr = addrEl.textContent.split('·')[0].split('／')[0]
+                   .split('（')[0].split('(')[0].trim();
+      if(addr && addrHints.some(h=>addr.includes(h))) query = addr;
+    }
+    return { placeEl, query };
+  }
+
+  function markCard(card){
+    const place = card.querySelector('.place');
+    const stop = card.closest('.stop');
+    if(!stop) return;
+    const badges = [...card.querySelectorAll('.badge')].map(b=>b.textContent);
+    const ptxt = place ? place.textContent : '';
+    if(card.querySelector('.badge.stay')) stop.classList.add('is-stay');
+    else if(badges.includes('客運') || /火車站|轉運站/.test(ptxt)) stop.classList.add('is-train');
+  }
+
+  /* 地圖連結：所有卡片（含美食分頁） */
+  document.querySelectorAll('.day .card').forEach(card=>{
+    markCard(card);
+    const r = placeQuery(card);
+    if(!r) return;
+    if(!r.placeEl.querySelector('.maplink')){
+      const a = document.createElement('a');
+      a.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.query);
+      a.target = '_blank'; a.rel = 'noopener'; a.className = 'maplink';
+      a.innerHTML = pinSvg + '地圖';
+      r.placeEl.appendChild(a);
+    }
+  });
+
+  /* 整日路線：每個 plan（晴天版／雨天版各自一條） */
+  document.querySelectorAll('.plan').forEach(plan=>{
+    const stops = [];
+    plan.querySelectorAll('.card').forEach(card=>{
+      const r = placeQuery(card);
+      if(r) stops.push(r.query);
+    });
+    if(stops.length >= 2){
+      const url = 'https://www.google.com/maps/dir/' +
+                  stops.slice(0,10).map(encodeURIComponent).join('/');
+      const btn = document.createElement('a');
+      btn.href = url; btn.target = '_blank'; btn.rel = 'noopener'; btn.className = 'routebtn';
+      btn.innerHTML = routeSvg + '整日路線';
+      const bar = plan.querySelector('.plan-bar');
+      if(bar) bar.appendChild(btn);
+    }
+  });
+
+  /* ---- 打包清單：勾選 + 進度 + 記憶 ---- */
+  const PKEY = 'luodong_pack_v1';
+  const pload = () => { try { return JSON.parse(localStorage.getItem(PKEY)) || {}; } catch(e){ return {}; } };
+  const psave = s => { try { localStorage.setItem(PKEY, JSON.stringify(s)); } catch(e){} };
+  let pstate = pload();
+  const pitems = document.querySelectorAll('.pack-item');
+  const pcount = document.getElementById('packCount');
+  const pbar = document.getElementById('packBar');
+
+  function pupdate(){
+    let done = 0;
+    pitems.forEach(it => { if(it.classList.contains('done')) done++; });
+    if(pcount) pcount.textContent = done + ' / ' + pitems.length;
+    if(pbar) pbar.style.width = (pitems.length ? done / pitems.length * 100 : 0) + '%';
+  }
+
+  pitems.forEach((it,i)=>{
+    const id = 'i' + i;
+    if(pstate[id]) it.classList.add('done');
+    it.addEventListener('click', ()=>{
+      it.classList.toggle('done');
+      pstate[id] = it.classList.contains('done');
+      psave(pstate);
+      pupdate();
+    });
+  });
+  pupdate();
+
+  const preset = document.getElementById('packReset');
+  if(preset) preset.addEventListener('click', ()=>{
+    pitems.forEach(it => it.classList.remove('done'));
+    pstate = {};
+    psave(pstate);
+    pupdate();
+  });
+</script>
+</body>
+</html>
