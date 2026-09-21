@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>沖繩 6 天 5 夜行程 · 9/30–10/5</title>
+<meta name="description" content="沖繩不自駕 6 天 5 夜互動行程表：每日時間軸、交通、景點介紹、餐廳推薦、注意事項與旅行清單。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ---- Design tokens (semantic; palette from brief) ---- */
+:root{
+  --color-background:#f8f5f2;
+  --color-card:#fffffe;
+  --color-headline:#232323;
+  --color-paragraph:#222525;
+  --color-button:#078080;
+  --color-button-hover:#066e6e;
+  --color-button-active:#055c5c;
+  --color-on-button:#232323;
+  --color-stroke:#232323;
+  --color-highlight:#078080;
+  --color-secondary:#f45d48;
+  --color-tertiary:#f45d48;
+  --color-tertiary-hover:#e04a35;
+  --color-border-soft:#d9d5d0;
+  --tint-highlight:#d6ecec;
+  --tint-tertiary:#fde0da;
+  --tint-secondary:#f8f5f2;
+  --tint-stroke:#e8e6e3;
+  --tint-paragraph:#f0eeeb;
+  --color-ring:#078080;
+  --scrim:rgba(35,35,35,.6);
+  --stay-c:#232323; --food-c:#f45d48;
+
+  /* type scale (modular 1.2, base 16) */
+  --text-xs:12px; --text-sm:14px; --text-base:16px; --text-lg:19px; --text-xl:23px; --text-2xl:28px;
+  --leading-body:1.6;
+  /* spacing 4/8 rhythm */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:24px; --space-8:32px; --space-12:48px;
+  /* radius */
+  --radius-sm:6px; --radius-md:8px; --radius-lg:12px;
+  /* motion tokens */
+  --dur-fast:120ms; --dur-base:200ms; --dur-slow:280ms;
+  --ease-out:cubic-bezier(.2,.8,.2,1); --ease-in:cubic-bezier(.4,0,1,1);
+  /* z scale */
+  --z-nav:20; --z-sheet:50; --z-toast:60;
+  /* targets */
+  --target:44px;
+
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --color-background:#232323; --color-card:#2e2e2e; --color-headline:#fffffe; --color-paragraph:#e6e3df;
+    --color-button:#078080; --color-button-hover:#0a9a9a; --color-button-active:#0bb0b0; --color-on-button:#fffffe;
+    --color-stroke:#cfcac4; --color-highlight:#3fb3b3; --color-tertiary:#f45d48; --color-tertiary-hover:#ff7a66; --color-border-soft:#4a4a4a;
+    --tint-highlight:#0f4a4a; --tint-tertiary:#5a2b25; --tint-secondary:#383838; --tint-stroke:#3c3c3c; --tint-paragraph:#383838;
+    --color-ring:#3fb3b3; --scrim:rgba(0,0,0,.7); --stay-c:#f8f5f2; --food-c:#f45d48;
+  }
+}
+:root[data-theme="dark"]{
+  --color-background:#232323; --color-card:#2e2e2e; --color-headline:#fffffe; --color-paragraph:#e6e3df;
+  --color-button:#078080; --color-button-hover:#0a9a9a; --color-button-active:#0bb0b0; --color-on-button:#fffffe;
+  --color-stroke:#cfcac4; --color-highlight:#3fb3b3; --color-tertiary:#f45d48; --color-tertiary-hover:#ff7a66; --color-border-soft:#4a4a4a;
+  --tint-highlight:#0f4a4a; --tint-tertiary:#5a2b25; --tint-secondary:#383838; --tint-stroke:#3c3c3c; --tint-paragraph:#383838;
+  --color-ring:#3fb3b3; --scrim:rgba(0,0,0,.7); --stay-c:#f8f5f2; --food-c:#f45d48;
+}
+
+/* ---- Base ---- */
+html{height:100%;scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 96px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--color-background);color:var(--color-headline);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;font-size:var(--text-base);line-height:var(--leading-body);-webkit-font-smoothing:antialiased;overflow-wrap:anywhere}
+button{font-family:inherit;color:inherit;font-size:inherit}
+a{color:var(--color-button)}
+svg.ic{width:20px;height:20px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+svg.ic.sm{width:16px;height:16px}
+.skip{position:absolute;left:var(--space-3);top:-48px;background:var(--color-button);color:var(--color-on-button);padding:var(--space-2) var(--space-4);border-radius:var(--radius-md);z-index:100;transition:top var(--dur-fast)}
+.skip:focus{top:var(--space-3);outline:2px solid var(--color-headline);outline-offset:2px}
+
+/* Focus: visible ring on every control, 2px+ with 3:1 contrast */
+:where(button,a,input,[tabindex]):focus-visible{outline:3px solid var(--color-ring);outline-offset:2px;border-radius:var(--radius-md)}
+
+/* ---- Hero ---- */
+.hero{background:#232323;color:#f8f5f2;padding:var(--space-6) var(--space-4) var(--space-5)}
+.hero .inner{max-width:720px;margin:0 auto}
+.hero h1{margin:0;font-size:var(--text-2xl);font-weight:900;letter-spacing:.01em;line-height:1.2;text-wrap:balance}
+.hero .sub{margin:var(--space-2) 0 0;font-size:var(--text-base);color:#f8f5f2;max-width:60ch}
+.hero .flights{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-2);margin-top:var(--space-4)}
+.hero .flight{border:2px solid #078080;border-radius:var(--radius-md);padding:var(--space-2) var(--space-3);font-size:var(--text-sm);line-height:1.45;display:flex;gap:var(--space-2);align-items:flex-start}
+.hero .flight svg{color:#f45d48;margin-top:2px}
+.hero .flight b{display:block;font-size:var(--text-base)}
+
+/* ---- Day tabs (sticky, scrollable, keyboard operable) ---- */
+.tabs-wrap{position:sticky;top:env(safe-area-inset-top,0px);z-index:var(--z-nav);background:var(--color-card);border-bottom:2px solid var(--color-stroke)}
+.tabs{max-width:720px;margin:0 auto;padding:var(--space-2) var(--space-3);display:flex;gap:var(--space-2);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x;scroll-snap-type:x proximity}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;min-height:var(--target);min-width:84px;border:2px solid var(--color-stroke);background:var(--color-card);color:var(--color-headline);border-radius:var(--radius-md);padding:var(--space-1) var(--space-3);text-align:left;cursor:pointer;scroll-snap-align:center;display:flex;flex-direction:column;justify-content:center;transition:background-color var(--dur-base) var(--ease-out),color var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out),box-shadow var(--dur-fast)}
+.tab .d{font-weight:700;font-size:var(--text-sm);line-height:1.2}
+.tab .d small{font-weight:500;margin-left:3px}
+.tab .w{font-size:var(--text-xs);color:var(--color-paragraph);margin-top:2px;line-height:1.2}
+.tab[aria-selected="true"] .w{color:var(--color-on-button)}
+@media (hover:hover){.tab:hover{background:var(--tint-highlight)}}
+.tab:active{background:var(--tint-highlight);box-shadow:inset 0 0 0 2px var(--color-button)}
+.tab[aria-selected="true"]{background:var(--color-button);border-color:var(--color-button);color:var(--color-on-button)}
+@media (hover:hover){.tab[aria-selected="true"]:hover{background:var(--color-button-hover)}}
+.tab.list{border-style:dashed}
+.tab svg{display:none}
+
+main{max-width:720px;margin:0 auto;padding:var(--space-4) var(--space-4) var(--space-12)}
+@media (min-width:768px){main{padding-left:var(--space-6);padding-right:var(--space-6)}}
+
+/* ---- Day header ---- */
+.dayhead{margin:var(--space-1) 0 var(--space-5)}
+.dayhead h2{margin:0;font-size:var(--text-xl);font-weight:900;line-height:1.3;text-wrap:balance}
+.dayhead .meta{display:flex;flex-wrap:wrap;gap:var(--space-1) var(--space-4);margin-top:var(--space-2);font-size:var(--text-sm);color:var(--color-paragraph)}
+.dayhead .meta span{display:inline-flex;align-items:center;gap:6px}
+.dayhead .lead{margin:var(--space-3) 0 0;font-size:var(--text-sm);color:var(--color-headline);background:var(--color-card);border:2px solid var(--color-stroke);border-left:6px solid var(--color-secondary);padding:var(--space-3) var(--space-4);border-radius:0 var(--radius-md) var(--radius-md) 0;max-width:70ch}
+.legend{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-4);font-size:var(--text-xs);color:var(--color-paragraph);margin:0 0 var(--space-4)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:50%;background:var(--c);display:inline-block}
+
+/* ---- Timeline ---- */
+.tl{position:relative;padding-left:68px}
+.tl::before{content:"";position:absolute;left:58px;top:6px;bottom:6px;width:2px;background:var(--color-border-soft)}
+.item{position:relative;margin-bottom:var(--space-3)}
+.item .time{position:absolute;left:-68px;top:14px;width:50px;text-align:right;font-size:var(--text-sm);font-weight:700;color:var(--color-paragraph);line-height:1.2;font-variant-numeric:tabular-nums}
+.item.t-stay{--type:var(--stay-c)} .item.t-food{--type:var(--food-c)}
+.item .dot{position:absolute;left:-15px;top:19px;width:12px;height:12px;border-radius:50%;background:var(--type);border:2px solid var(--color-background);box-shadow:0 0 0 2px var(--type)}
+.item.t-transport .dot{width:8px;height:8px;left:-13px;top:21px;background:var(--color-background);border:2px solid var(--color-stroke);box-shadow:none}
+.card{background:var(--color-card);border-radius:var(--radius-md);border:2px solid var(--color-stroke);border-left:6px solid var(--type);padding:var(--space-3) var(--space-4)}
+.item.t-transport .card{border:0;background:transparent;padding:var(--space-2) 0 var(--space-1)}
+.item.t-transport .card .title{font-size:var(--text-sm);font-weight:500;color:var(--color-paragraph)}
+.card .top{display:flex;align-items:flex-start;gap:var(--space-2)}
+.card .title{font-size:var(--text-base);font-weight:700;line-height:1.4;flex:1;min-width:0}
+.card .tag{font-size:var(--text-xs);padding:2px 8px;border-radius:var(--radius-sm);background:var(--type-light);color:var(--color-headline);font-weight:700;white-space:nowrap;margin-top:2px;display:inline-flex;align-items:center;gap:4px}
+.card .trans{font-size:var(--text-sm);color:var(--color-paragraph);margin-top:var(--space-1);display:flex;gap:6px;align-items:flex-start}
+.card .trans svg{margin-top:3px;color:var(--color-highlight)}
+.card .brief{font-size:var(--text-sm);color:var(--color-paragraph);margin-top:var(--space-2);max-width:70ch}
+
+/* ---- Buttons ---- */
+.actions{display:flex;gap:var(--space-2);margin-top:var(--space-3);flex-wrap:wrap}
+.btn{min-height:var(--target);min-width:var(--target);border:2px solid var(--color-border-soft);background:var(--color-card);color:var(--color-headline);border-radius:var(--radius-md);padding:0 var(--space-3);font-size:var(--text-sm);font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;line-height:1.2;text-decoration:none;touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:transparent;transition:background-color var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out),color var(--dur-base) var(--ease-out),box-shadow var(--dur-fast) var(--ease-out)}
+@media (hover:hover){.btn:hover{background:var(--tint-highlight);border-color:var(--color-button)}}
+.btn:active{background:var(--tint-highlight);box-shadow:inset 0 0 0 2px var(--color-button)}
+.btn .chev{transition:transform var(--dur-base) var(--ease-out)}
+.btn.detail[aria-expanded="true"]{background:var(--color-button);border-color:var(--color-button);color:var(--color-on-button)}
+.btn.detail[aria-expanded="true"] .chev{transform:rotate(180deg)}
+@media (hover:hover){.btn.detail[aria-expanded="true"]:hover{background:var(--color-button-hover)}}
+.btn.detail[aria-expanded="true"]:active{background:var(--color-button-active);box-shadow:none}
+.btn.primary{background:var(--color-button);border-color:var(--color-button);color:var(--color-on-button);font-weight:700}
+@media (hover:hover){.btn.primary:hover{background:var(--color-button-hover);border-color:var(--color-button-hover)}}
+.btn.primary:active{background:var(--color-button-active);border-color:var(--color-button-active);box-shadow:none}
+.btn.ghost{border-color:transparent;color:var(--color-paragraph)}
+.btn:disabled,.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.ibtn{min-width:var(--target);min-height:var(--target);border:2px solid var(--color-tertiary);color:var(--color-tertiary);background:var(--tint-tertiary);border-radius:var(--radius-md);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:0 var(--space-3);font-size:var(--text-sm);font-weight:700;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background-color var(--dur-base) var(--ease-out),color var(--dur-base) var(--ease-out),box-shadow var(--dur-fast)}
+@media (hover:hover){.ibtn:hover{background:var(--color-tertiary);color:#232323}}
+.ibtn:active{background:var(--color-tertiary-hover);color:#232323;box-shadow:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ibtn{color:#ffb3a6}}
+.item.t-transport .btn{background:var(--color-background)}
+
+/* ---- Expandable detail ---- */
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur-slow) var(--ease-out)}
+.more>div{overflow:hidden;min-height:0}
+.more.open{grid-template-rows:1fr}
+.more .inner{margin-top:var(--space-3);padding-top:var(--space-3);border-top:1px dashed var(--color-border-soft);font-size:var(--text-sm)}
+.more h4{margin:var(--space-3) 0 var(--space-1);font-size:var(--text-sm);color:var(--color-paragraph);font-weight:700}
+.more h4:first-child{margin-top:0}
+.more p{margin:0 0 var(--space-2);max-width:70ch;color:var(--color-headline)}
+.menu{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-1)}
+.menu span{background:var(--tint-tertiary);color:var(--color-headline);border-radius:var(--radius-sm);padding:6px 10px;font-size:var(--text-sm);font-weight:500;display:inline-flex;align-items:center;gap:4px;line-height:1.3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .menu span{color:#fffffe}}
+.tt{width:100%;border-collapse:collapse;font-size:var(--text-sm);margin-top:var(--space-1);font-variant-numeric:tabular-nums}
+.tt th,.tt td{border-bottom:1px solid var(--color-border-soft);padding:6px 8px;text-align:left;white-space:nowrap}
+.tt th{color:var(--color-paragraph);font-weight:500}
+.tt tr.hl td{font-weight:700;color:var(--color-headline);background:var(--tint-highlight)}
+.tt tr.hl td:first-child::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--color-highlight);margin-right:6px;vertical-align:1px}
+.ttwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.fact{display:grid;grid-template-columns:auto 1fr;gap:2px var(--space-3);font-size:var(--text-sm)}
+.fact dt{color:var(--color-paragraph)}
+.fact dd{margin:0}
+
+/* ---- Bottom sheet (modal) ---- */
+.sheet-bg{position:fixed;inset:0;background:var(--scrim);display:flex;align-items:flex-end;justify-content:center;z-index:var(--z-sheet);opacity:0;visibility:hidden;transition:opacity var(--dur-base) var(--ease-out),visibility 0s linear var(--dur-base)}
+.sheet-bg.open{opacity:1;visibility:visible;transition:opacity var(--dur-base) var(--ease-out)}
+.sheet{background:var(--color-card);width:100%;max-width:720px;border-radius:14px 14px 0 0;border:2px solid var(--color-stroke);border-bottom:0;padding:var(--space-3) var(--space-5) calc(var(--space-6) + env(safe-area-inset-bottom,0px));max-height:80dvh;overflow-y:auto;transform:translateY(24px);transition:transform var(--dur-slow) var(--ease-out)}
+.sheet-bg.open .sheet{transform:translateY(0)}
+.sheet .grab{width:40px;height:4px;border-radius:2px;background:var(--color-border-soft);margin:0 auto var(--space-3)}
+.sheet h3{margin:0 0 var(--space-3);font-size:var(--text-lg);display:flex;align-items:center;gap:var(--space-2);color:var(--color-headline)}
+.sheet h3 svg{color:var(--color-tertiary)}
+.sheet ul{margin:0;padding:0;list-style:none}
+.sheet li{padding:var(--space-3) 0;border-bottom:1px solid var(--color-border-soft);font-size:var(--text-base);display:flex;gap:var(--space-3);align-items:flex-start;max-width:70ch}
+.sheet li svg{color:var(--color-tertiary);margin-top:3px}
+.sheet li:last-child{border-bottom:0}
+.sheet .close{margin-top:var(--space-4);width:100%;justify-content:center;min-height:48px;font-size:var(--text-base)}
+
+/* ---- Toast ---- */
+.toast{position:fixed;left:50%;bottom:calc(var(--space-6) + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);background:var(--color-headline);color:#f8f5f2;padding:var(--space-3) var(--space-4);border-radius:var(--radius-md);font-size:var(--text-sm);z-index:var(--z-toast);opacity:0;visibility:hidden;transition:opacity var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out),visibility 0s linear var(--dur-base);display:flex;gap:var(--space-2);align-items:center;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0);transition:opacity var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .toast{background:#f8f5f2;color:#232323}}
+
+/* ---- Checklist ---- */
+.prog{background:var(--color-card);border-radius:var(--radius-md);border:2px solid var(--color-stroke);padding:var(--space-4);margin-bottom:var(--space-4)}
+.prog .row{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3)}
+.prog .row b{font-size:var(--text-lg)}
+.prog .bar{height:8px;background:var(--tint-secondary);border-radius:4px;overflow:hidden;margin-top:var(--space-2)}
+.prog .bar i{display:block;height:100%;background:var(--color-button);width:0;transition:width var(--dur-slow) var(--ease-out)}
+.prog .hint{font-size:var(--text-xs);color:var(--color-paragraph);margin:var(--space-2) 0 0}
+.group{background:var(--color-card);border-radius:var(--radius-md);border:2px solid var(--color-stroke);margin-bottom:var(--space-3);overflow:hidden}
+.group h3{margin:0;padding:var(--space-3) var(--space-4);font-size:var(--text-base);display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--color-border-soft)}
+.group h3 small{font-weight:500;color:var(--color-paragraph);font-size:var(--text-xs);font-variant-numeric:tabular-nums}
+.group .why{font-size:var(--text-xs);color:var(--color-paragraph);padding:var(--space-2) var(--space-4) 0;margin:0}
+.check{display:flex;gap:var(--space-3);align-items:flex-start;padding:var(--space-3) var(--space-4);min-height:var(--target);border-bottom:1px solid var(--color-border-soft);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:background-color var(--dur-fast)}
+.check:last-child{border-bottom:0}
+@media (hover:hover){.check:hover{background:var(--tint-highlight)}}
+.check:active{background:var(--tint-highlight)}
+.check input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--color-button);flex:0 0 auto;cursor:pointer}
+.check .lab{flex:1;font-size:var(--text-base);min-width:0}
+.check .lab small{display:block;color:var(--color-paragraph);font-size:var(--text-xs);margin-top:1px}
+.check.done .lab{color:var(--color-paragraph);opacity:.6;text-decoration:line-through;text-decoration-color:var(--color-highlight)}
+.check:has(input:focus-visible){box-shadow:inset 0 0 0 3px var(--color-ring)}
+.check input:focus-visible{outline:none}
+
+footer{text-align:center;font-size:var(--text-xs);color:var(--color-paragraph);padding:var(--space-5) 0 0;max-width:60ch;margin:0 auto}
+
+@media (min-width:600px){.tl{padding-left:80px}.tl::before{left:70px}.item .time{left:-80px;width:60px}.item .dot{left:-17px}.item.t-transport .dot{left:-15px}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:0ms!important;animation:none!important}
+  .sheet{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#view">跳到行程內容</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></symbol>
+  <symbol id="i-bed" viewBox="0 0 24 24"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></symbol>
+  <symbol id="i-bus" viewBox="0 0 24 24"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.5 2.5a.5.5 0 0 1 1 0l2.4 5.6 6 .5a.5.5 0 0 1 .3.9l-4.6 4 1.4 5.9a.5.5 0 0 1-.8.6L12 16.9 6.8 20a.5.5 0 0 1-.8-.6L7.4 13.5l-4.6-4a.5.5 0 0 1 .3-.9l6-.5z"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+</svg>
+
+<header class="hero">
+  <div class="inner">
+    <h1>沖繩 6 天 5 夜</h1>
+    <p class="sub">2026/9/30（三）– 10/5（一）· Peter & Sandy · 不自駕：單軌＋路線巴士＋接駁＋一日遊</p>
+    <div class="flights">
+      <div class="flight"><svg class="ic" aria-hidden="true"><use href="#i-plane"/></svg><div><b>去 IT230 · 9/30</b>06:50 桃園 T1 → 09:20 那霸</div></div>
+      <div class="flight"><svg class="ic" aria-hidden="true"><use href="#i-plane"/></svg><div><b>回 IT233 · 10/5</b>21:40 那霸 → 22:10 桃園</div></div>
+      <div class="flight"><svg class="ic" aria-hidden="true"><use href="#i-bed"/></svg><div><b>住宿</b>麗山谷茶灣 2 晚 → 東橫INN 旭橋 3 晚</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="tabs-wrap"><nav class="tabs" id="tabs" role="tablist" aria-label="切換日期"></nav></div>
+
+<main id="main">
+  <section id="view" role="tabpanel" tabindex="-1" aria-live="polite"></section>
+  <footer>公車：現金或感應信用卡，不收 Suica。單軌：刷卡感應，單日上限 ¥800。出發前一週再用 NAVITIME／Google Maps 核對巴士班次。</footer>
+</main>
+
+<div class="sheet-bg" id="sheetbg" role="dialog" aria-modal="true" aria-labelledby="sheet-title" aria-hidden="true">
+  <div class="sheet" role="document">
+    <div class="grab" aria-hidden="true"></div>
+    <h3 id="sheet-title"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg><span id="sheet-name"></span></h3>
+    <ul id="sheet-list"></ul>
+    <button class="btn primary close" id="sheet-close">知道了</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const DAYS = [
+{ date:"9/30", dow:"三", short:"抵達・恩納", title:"抵達 → 恩納村（仲泊半日）", stay:"麗山海景度假酒店 谷茶灣（房型 A）", table:"平日表",
+  lead:"02:20 起床、06:50 起飛，要到晚上八點才進得了房。下午的仲泊遺跡要爬石疊坡，體力撐不住就砍掉它，多留一小時在おんなの駅（恩納之驛）慢慢逛。",
+  items:[
+  { t:"02:35", type:"transport", title:"叫車 → 台北轉運站", trans:"計程車約 8–9 km、15–20 分、約 NT$300（多人分攤）",
+    intro:"前一晚搭 207 到後山埤朋友家會合，半夜一起出發。",
+    notes:["02:55 要到 4 樓 409 號月台排隊，提早 20 分鐘。"], map:"台北轉運站" },
+  { t:"03:00", type:"transport", title:"國光客運 1819 → 桃園機場 T1", trans:"約 55 分，單程約 NT$140，刷悠遊卡上車",
+    facts:{"上車":"台北轉運站 4F 409 月台","下車":"第一航廈 B1 客運巴士候車區，上樓到出境大廳","營運":"24 小時，深夜約每小時一班"},
+    notes:["1819 是自由座不能訂位，客滿就等下一班＝再等一小時，提早 20 分鐘到月台。","終點是 T2，T1 是中途站——虎航在 T1，務必在第一航廈下車。","直接刷悠遊卡最省事，凌晨不用去櫃檯排隊。"] },
+  { t:"04:20", type:"transport", title:"虎航 T1 報到（7 號櫃檯區）", trans:"04:20 開櫃 → 06:05 關櫃（準時關）",
+    intro:"開櫃是起飛前 2.5 小時，不用更早到。報到、託運後 05:00 出境安檢，06:10 到登機門。",
+    notes:["06:05 關櫃是絕對底線。","行李加購與座位指定要在出發前 4 小時於官網完成——實務上就是前一晚睡前弄好。現場超重用較高費率收，現場也無法免費選位。","機捷 A3 市區預辦登機是白天服務，這班用不到。"] },
+  { t:"06:50", type:"transport", title:"IT230 起飛 → 09:20 那霸機場", trans:"飛行約 1.5 小時，10:00 出關後步行 10 分到國內線航廈" },
+  { t:"10:15", type:"food", title:"ポーたま（豬肉蛋飯糰） 國內線到達大廳店", trans:"國際線 ↔ 國內線步行約 10 分", brief:"沖繩國民早餐：午餐肉＋玉子燒飯糰，現點現做。",
+    intro:"「豬肉蛋飯糰（ポークたまごおにぎり）」是沖繩人從小吃到大的早餐，源自美軍時代留下的午餐肉罐頭。本店在牧志市場旁，機場店口味較少但經典款都有。點餐報編號、外帶拿號碼牌，門口右邊有叫號機。",
+    menu:[{n:"3 號 炸蝦（塔塔醬）",top:true},{n:"1 號 苦瓜天婦羅（苦味明顯，大人口味）"},{n:"8 號 鰹魚昆布 ¥460"},{n:"基本款 午餐肉玉子燒 約 ¥390–480"}],
+    facts:{"營業":"07:00–21:00","評價":"4.1"},
+    notes:["排隊別低估：食記說從排隊到取餐約 30 分鐘。10:50 要到乘車處，只有 35 分鐘，別逛航廈。","國際線店有限定的「滷肉飯」口味——先確認接駁巴士確認信上的乘車航廈，若是國際線就在那邊吃。","第一天順手把大鈔換開，之後搭公車要 ¥1,000 鈔與硬幣。"],
+    map:"ポーたま 那覇空港国内線店" },
+  { t:"11:00", type:"transport", title:"リゾートライナー（沖繩機場接駁巴士）→ サンマリーナビーチ前（Sun Marina 海灘前站） 12:23", trans:"車程 1 小時 23 分 · 2 名 ¥3,200 含稅 · 車上有 Wi-Fi",
+    intro:"已訂。恩納村・美麗海方向，單向一天 11 班，比利木津（一天 4 班）早 47 分鐘到、班次多三倍。恩納停靠：おんなの駅（恩納之驛） → タイガービーチ前（老虎海灘前站） → サンマリーナビーチ前（Sun Marina 海灘前站） → ナビービーチ前（Nabee 海灘前站）。",
+    notes:["麗山不是直接停靠站，サンマリーナビーチ前（Sun Marina 海灘前站）下車步行 5 分。","備案：班機延誤可改後續班次；再不行搭單軌到旭橋 → 那霸巴士總站 11 號站台搭 20／120 到谷茶，約 1.5–2 小時、約 ¥1,420。"],
+    map:"サンマリーナビーチ前 バス停" },
+  { t:"12:28", type:"stay", title:"麗山海景度假酒店 谷茶灣 · 寄行李（不 check-in）", trans:"サンマリーナビーチ前（Sun Marina 海灘前站）步行 5 分", brief:"全館 826 房、對面有 FamilyMart（含 ATM）。",
+    intro:"谷茶灣上的大型度假飯店，房間偏舊但寬敞，有私人海灘與泳池。2025/10–2027/3 大規模改修中，可正常住宿但可能有噪音。",
+    facts:{"check-in":"15:00（2026/5/8 起）","早餐":"Tancha-Bay 西式 06:30–10:00 ／ 七福 日式 07:00–09:30","最近巴士站":"谷茶の丘（250 m、3–4 分）"},
+    notes:["飯店不認提早入住——所有人都在大廳等到 15:00 整才一起排隊。今晚 19:50 才 check-in 反而避開人潮。","兩晚不同房型，明早要先退房再重新入住。","巴士站是「谷茶の丘（谷茶之丘）」不是「谷茶」（1.1 km、相距 800 m），別站錯邊。"],
+    map:"リザンシーパークホテル谷茶ベイ" },
+  { t:"12:54", type:"transport", title:"20／120 號南下 谷茶の丘（谷茶之丘） → 仲泊 13:01", trans:"7 分 · 約 ¥250 · 現金或感應信用卡",
+    intro:"寄完行李走到站牌約 17 分鐘，12:54 那班剛好；趕不上還有 13:19、13:44。",
+    tbl:{head:["谷茶","谷茶の丘（谷茶之丘） ←上車","仲泊","ルネッサンス前（Renaissance 飯店前）"],rows:[["12:28","12:29","12:36","12:39"],["12:53","12:54","13:01","13:04"],["13:18","13:19","13:26","13:29"],["13:43","13:44","13:51","13:54"]],hl:1},
+    notes:["沖繩路線巴士不收 Suica／ICOCA，只收現金或感應信用卡（VISA／JCB／AMEX）。","整理券制，車資看車上運賃表。","出發前一週用 NAVITIME 或 Google Maps 再核對一次班次。"],
+    map:"谷茶の丘 バス停" },
+  { t:"13:10", type:"spot", title:"恩納村博物館", trans:"仲泊站步行可到", brief:"免費 · 09:00–17:00 · 週一休（9/30 週三有開）",
+    intro:"小而安靜的村立博物館，展示恩納村的地理、歷史、庶民生活與動植物昆蟲，附設圖書館。大廳可看海景，遊客極少。恩納村是琉球王國時代連結首里與北部的中繼點，村名相傳來自「恩納ナビー」——18 世紀的女歌人，也是琉歌史上最著名的女性作者，她的歌碑就在村內。",
+    facts:{"評價":"4.2／179"},
+    notes:["說明牌全是日文，開 Google 翻譯鏡頭。","有評論提到第二部分展覽目前關閉。"],
+    map:"恩納村博物館" },
+  { t:"14:35", type:"spot", title:"仲泊遺跡", trans:"博物館旁約 200 m", brief:"免費 · 24 小時 · 國家指定史蹟",
+    intro:"沖繩縣內最大的考古遺址群：四座貝塚、約 3,500 年前繩文時代的居住洞穴，以及一條琉球王國時代連接南、中、北部的石疊道（國頭方西海道的一段）。爬到上面海景很好，是條短健行路線。",
+    facts:{"評價":"3.7／37","時間":"約 1 小時"},
+    notes:["一定要穿好鞋，某些路段石疊很難走，有人穿涼鞋後悔。","今天最好砍的一段——累了就跳過，直接去おんなの駅（恩納之驛）。"],
+    map:"仲泊遺跡" },
+  { t:"15:45", type:"spot", tag:"市場", title:"おんなの駅（恩納之驛） なかゆくい市場（「歇一下」市場）", trans:"步行", brief:"10:00–19:00 · 4.2／8,763 · 農產直賣所＋小吃攤",
+    intro:"恩納村的「道之驛」，方言「なかゆくい」是「歇一下」的意思。在地農家直送蔬果、海鮮，外圍一圈小吃攤，是恩納海岸線最熱鬧的休息站。",
+    menu:[{n:"芒果冰沙",top:true},{n:"水果剉冰"},{n:"滷豬腳 てびち"},{n:"生魚片"},{n:"塔可飯"},{n:"沙翁 サーターアンダギー（沖繩甜甜圈）"}],
+    notes:["19:00 關門。","攤位多半只收現金。","沖繩甜甜圈偏乾可跳過；這裡少吃一點，留肚子給浜の家（濱之家）。"],
+    map:"おんなの駅 なかゆくい市場" },
+  { t:"17:30", type:"food", title:"晚餐：浜の家（濱之家）", trans:"おんなの駅（恩納之驛）步行 200 m", brief:"11:00–21:30 · 4.4／3,459 · 海鮮定食",
+    intro:"仲泊漁港旁的海鮮食堂，平板自助點餐，份量很足（飯、湯、配菜、甜點），結帳後還送沖繩傳統點心。",
+    menu:[{n:"奶油烤魚套餐 バター焼き定食（奶油燒烤定食）",top:true},{n:"厚切生魚片"},{n:"海鮮丼"}],
+    notes:["可訂位更保險（待辦）。","回程末班北上 21:15，別吃到忘記。"],
+    map:"浜の家 恩納村" },
+  { t:"19:35", type:"transport", title:"20／120 號北上 仲泊 → 谷茶の丘（谷茶之丘） 19:43", trans:"8 分 · 約 ¥250（ルネッサンスホテル前（Renaissance 飯店前站） 19:32 上車亦可）",
+    tbl:{head:["ルネッサンス前（Renaissance 飯店前）","仲泊","谷茶の丘（谷茶之丘） ←下車","谷茶"],rows:[["18:13","18:16","18:24","18:25"],["18:55","18:58","19:06","19:07"],["19:32","19:35","19:43","19:44"],["20:11","20:13","20:21","20:22"],["20:33","20:35","20:43","20:44"],["21:13","21:15","21:23","21:24 末班"]],hl:2},
+    map:"仲泊 バス停 恩納村" },
+  { t:"19:50", type:"stay", title:"回飯店 check-in（房型 A）", trans:"谷茶の丘（谷茶之丘）步行 3–4 分", intro:"避開 15:00 排隊人潮，晚上櫃檯沒人直接進房。明早 07:15 吃七福。" }
+]},
+
+{ date:"10/1", dow:"四", short:"青洞・谷茶", title:"青之洞窟浮潛 → OIST → 谷茶散步", stay:"麗山谷茶灣（換房型 B）", table:"平日表",
+  lead:"兩晚不同房型：08:30 先退房寄行李。浮潛店家會直接載去 OIST、不回飯店，換洗衣物、毛巾、錢包全帶在身上。下午一路下坡，完全不用搭車。",
+  items:[
+  { t:"07:15", type:"food", title:"早餐：七福（日式自助）", trans:"飯店內 · 07:00–09:30", brief:"把特色留給今天：明早只趕得上 Tancha-Bay。",
+    menu:[{n:"自製鮭魚卵海鮮丼 吃到飽",top:true},{n:"豬肉涮涮鍋"},{n:"沖繩飯糰 DIY"}],
+    notes:["09:30 要下水，別吃太飽。"] },
+  { t:"08:30", type:"stay", title:"退房（房型 A），行李寄櫃檯", intro:"浮潛 09:30 開始，來不及等 11:00 退房。", notes:["換洗衣物、毛巾、錢包帶在身上——浮潛完店家直接載去 OIST，不會回飯店。"] },
+  { t:"09:30", type:"spot", tag:"體驗", title:"青之洞窟 船潛浮潛（KKday 20901 黑潮潛水）", trans:"09:15 走到谷茶集合點 · 2.5 小時 · 含溫水沖洗、在店家換衣", brief:"4.9 · 全中文 · 船費器材照片全含、現場無追加費用",
+    intro:"「青の洞窟（青之洞窟）」在真榮田岬，是海蝕形成的洞穴：陽光從洞口穿透海水再反射到洞內，整個水面透出鈷藍色的光，是沖繩最有名的浮潛點。船潛直接開到洞口，比岸潛（成功率約 35%）穩得多。洞內外常見小丑魚、雀鯛與熱帶魚群。",
+    notes:["不要加購體驗潛水——潛水後 18 小時內不可搭機；浮潛無限制。","5 天前免費取消，之後不退。颱風時海上行程幾乎一定取消但通常全退；建議加 Klook／KKday 的未體驗退款保障。","確認集合點確實在谷茶（住麗山走路就到）。"],
+    map:"真栄田岬 青の洞窟" },
+  { t:"12:00", type:"transport", title:"店家直接載到 OIST", trans:"省掉原本 20 分鐘上坡" },
+  { t:"12:15", type:"spot", title:"OIST 沖繩科學技術大學院大學", trans:"visitor center 領參觀證（免費，09:00–17:00）", brief:"4.6／340 · 山脊上的研究型大學，海景校園",
+    intro:"2011 年設立、全英語授課的博士研究型大學，日本政府為把沖繩打造成國際科學據點而投入巨資，教職員一半以上是外國人。校園蓋在谷茶上方的山脊，建築隨地形分層，中央走廊與隧道電扶梯穿過山體，從露台能俯瞰整片東海。評論說「即使不是科學家也很值得一訪」。",
+    notes:["要先到 visitor center 領參觀證，Cafe Tancha 在校內。","校園有階梯與長廊，穿好走的鞋。"],
+    map:"沖縄科学技術大学院大学 OIST" },
+  { t:"12:30", type:"food", title:"午餐：Cafe Tancha（OIST 校內 C 階）", trans:"平日 08:00–18:00 · 週六日公休（10/1 週四 有開）", brief:"4.2／42 · 烘焙與湯品為主，窗外是東海",
+    menu:[{n:"南瓜湯",top:true},{n:"抹茶拿鐵"},{n:"沖繩咖啡"},{n:"純素糕點（少見）"}],
+    notes:["以烘焙和湯為主，浮潛完很餓可能不夠飽——不夠就回飯店前在 FamilyMart 補。","有評論說可頌加熱後不脆。"],
+    map:"Cafe Tancha OIST" },
+  { t:"13:30", type:"spot", title:"參觀 OIST 校園", trans:"到 15:00", intro:"沿中央走廊看實驗室外觀與展示，再到海景露台。15:00 從校門下坡約 700 m、10 分到海邊。" },
+  { t:"15:10", type:"spot", title:"谷茶前の浜の碑", trans:"下坡 700 m、10 分", brief:"24 小時免費 · 4.1／58 · 按鈕會播「谷茶前節」",
+    intro:"黑色石碑旁有按鈕，按下去播放以這片海為名的琉球民謠「谷茶前節（たんちゃめーぶし）」：描寫谷茶漁村的男人划船出海捕鰹魚、女人挑著魚簍到村裡販售的歡快情景，是沖繩雜踊（庶民舞）最常演出的曲目。看過沖繩傳統歌舞的人一聽就認得。也是看夕陽、撿貝殼的好地方。",
+    map:"谷茶前の浜の碑" },
+  { t:"16:00", type:"stay", title:"回飯店 check-in（房型 B）、沖澡換衣", trans:"步行 800 m、10 分", intro:"已過 15:00 排隊尖峰。16:50 順路看谷茶の丘（谷茶之丘）站旁的展望台（飯店出來 200 m）。" },
+  { t:"17:10", type:"transport", title:"請櫃檯叫計程車 → 琉球の牛（琉球之牛） 恩納別館", trans:"車程約 5 分 · 約 ¥1,000–1,500 · 現金",
+    intro:"麗山到別館約 2.2 km。這時段公車（谷茶の丘（谷茶之丘） → ムーンビーチ前（月亮海灘前站））有 80 分鐘班距空窗，誤點 15 分鐘就觸發「不得入場＋¥20,000 取消費」，計程車這筆帳很好算。恩納村沒有路邊攔車習慣，一定要請櫃檯代叫。",
+    notes:["至少提前 15 分鐘叫車。","不想花錢就走路：2.2 km、約 30 分，沿 58 號線平路——但今天已浮潛加逛校園，自行斟酌。"] },
+  { t:"17:30", type:"food", title:"晚餐：琉球の牛（琉球之牛） 恩納別館（已訂 2 名）", trans:"恩納村前兼久 101-1 · 16:30–23:00 · +81 98-923-1196", brief:"4.9／6,013 · 沖繩人氣和牛燒肉",
+    intro:"沖繩最有名的和牛燒肉店之一，以嚴選黑毛和牛與石垣牛等在地牛為主，iPad 多語點餐很簡單，座位有簾子隔開。評論常提到牛肉湯非常好，可試多種醬料，餐後附牛奶布丁。別館離「ムーンビーチ前（月亮海灘前站）」站約 100 m；本店走路 5 分。",
+    menu:[{n:"和牛拼盤（各部位一次吃）",top:true},{n:"牛肉湯",top:true},{n:"厚切牛舌"},{n:"牛奶布丁（附）"}],
+    notes:["遲到 15 分鐘就不能入場——實質截止 17:45。","當天取消／未到店每人 ¥10,000；前一天取消每人 ¥5,000。只接受網路取消，不接受電話。","有評論說上菜順序和速度不太一致，有時肉等很久。"],
+    map:"琉球の牛 恩納別館" },
+  { t:"19:30", type:"transport", title:"回飯店", trans:"計程車約 5 分，或步行 2.2 km、30 分" }
+]},
+
+{ date:"10/2", dow:"五", short:"恩納→那霸", title:"恩納 → 那霸：波上宮・新都心・元村", stay:"東橫INN 那覇旭橋駅前", table:"平日表",
+  lead:"改搭 08:26 接駁車比利木津早 66 分鐘到那霸，一次解掉三個卡點：漁師食堂不用候位、Sports Depo 到博物館一路往南不折返、元村 18:30 避開尖峰。緩衝 41 分鐘裡有 30 分鐘坐在大廳，別站在太陽下等。",
+  items:[
+  { t:"06:45", type:"food", title:"早餐：Tancha-Bay（西式自助）", trans:"飯店內 · 06:30–10:00", brief:"空間極大、緊鄰海景窗；七福 07:00 才開，今天來不及。", notes:["Tancha-Bay 實際開始時間文件假設 06:30，前一晚跟櫃檯確認。"] },
+  { t:"07:40", type:"stay", title:"退房", intro:"避開 09:00 之後的退房尖峰（826 房、利木津 09:19／11:19 會塞爆櫃檯）。07:40–08:10 在大廳整理隨身物、休息。" },
+  { t:"08:26", type:"transport", title:"リゾートライナー（Resort Liner 機場接駁巴士） Sun Marina Beach Mae（OAS07）→ 旭橋・那霸巴士總站 09:35", trans:"08:15 到站（飯店步行 5 分）· 車程 69 分 · 需線上預約（待訂）",
+    tbl:{head:["Sun Marina 發","旭橋","那霸機場"],rows:[["08:26","09:35","09:45"],["10:39","11:48","11:58"],["12:09","13:18","13:28"],["13:09","14:18","14:28"],["15:09","16:18","16:28"]],hl:0},
+    notes:["旭橋站對這條線是「下車專用」，只能下不能上。","想睡晚一點改 10:39 班（11:48 到），整天往後推約 2 小時 15 分，博物館週五開到 20:00 仍來得及，但元村會回到 20:00 後尖峰。","備案 20／120 南下：谷茶 11:53 → 旭橋 13:26、12:53 → 14:28，約 ¥1,420。","利木津 162 班（09:19 → 10:41）現在用不到，不用訂。"],
+    map:"サンマリーナビーチ前 バス停" },
+  { t:"09:45", type:"stay", title:"東橫INN 那覇旭橋駅前 · 櫃檯寄行李", trans:"旭橋站步行 5 分（約 370 m）", brief:"那霸市久米 2-1-20 · 4.0／1,328 · 免費早餐",
+    intro:"位置幾乎是那霸的最優解：旭橋站／巴士總站 5 分、縣廳前 RYUBO（一日遊集合點）5 分、A&W 7 分、波上宮 12 分、牧志市場 16 分、機場單軌 6 站。大廳有免費迎賓飲料與保養品試用包，走路可到 RYUBO 百貨與 Jack's Steak House。",
+    facts:{"check-in":"16:00（東橫INN 全國標準）","checkout":"10:00","早餐":"一般 06:30–09:00（確認信再核對）"},
+    notes:["隔音偏差，有評論被機車聲吵醒——帶耳塞。","10/5 早餐與退房都要算好時間。"],
+    map:"東横INN那覇旭橋駅前" },
+  { t:"10:15", type:"spot", title:"波上宮", trans:"步行 875 m、12 分", brief:"09:00–17:00 · 免費 · 4.4／16,263 · 琉球八社之首",
+    intro:"建在波之上海灘上方的珊瑚礁斷崖上，是琉球八社中地位最高的一座，主祀熊野三神。傳說古時一位漁夫在海邊拾得會說話的靈石而建社，此後歷代琉球國王每年正月親自參拜，祈求航海平安、豐漁與五穀豐收——對以海洋貿易立國的琉球王國，這裡是「國家的守護神社」。二戰中全毀，1953 年起陸續重建；現在的朱紅本殿與沖繩式紅瓦是 1993 年完成的。旁邊的波之上海灘是那霸市區唯一的海灘。",
+    notes:["御守、御朱印只收現金，備約 ¥2,000。","規模不大，30 分鐘足夠；御守可能要排隊。","海灘旁就是高架橋，看不到開闊海景，順路看一眼即可。","10/5 晨跑會經過的沖宮也是琉球八社，兩座分兩天走完剛好成一組。"],
+    map:"波上宮" },
+  { t:"10:50", type:"transport", title:"計程車 波上宮 → 漁師食堂", trans:"約 2.7 km、8 分、¥1,000–1,200 · 現金",
+    intro:"多花 ¥1,000 換一小時的從容。公車版要走回縣廳北口 1.1 km → 搭到安謝 → 再走 1.1 km，12:35 才到。",
+    notes:["備案公車：縣廳北口 → 安謝，23／24／27／120／143 等班次密集（120 11:05、143 11:12、27 11:19、23 11:27）。","不要走 101 番：前一班是早上 7 點。"] },
+  { t:"11:00", type:"food", title:"午餐：漁師食堂 魚大統領（港町）", trans:"泊漁港旁 · 10:00 開門", brief:"4.3／1,065 · 餐券機、現金",
+    intro:"泊漁港旁由漁業關係者經營的食堂，用當天港口卸下的魚做定食，價格比觀光區便宜。自助餐券機買券後入座。",
+    menu:[{n:"海鮮丼",top:true},{n:"生魚片定食"},{n:"炸魚／魚天婦羅定食"},{n:"當日鮮魚煮付け（醬煮）"}],
+    notes:["餐券機只收現金，備 ¥3,000。","11:00 到避開 12:00 那波（候位 20–35 分）。","週一、二只到 17:00，其他天到 21:00。","可用巴士站：「倉庫前」步行 4 分、「安謝」1.1 km。"],
+    map:"漁師食堂 魚大統領 那覇市港町" },
+  { t:"12:47", type:"transport", title:"223／228 安謝 → 樂市前 12:52", trans:"12:20 走 1.1 km、15 分到「安謝」站 · 車程 5 分",
+    intro:"在「樂市前」下車，不是「縣立博物館前」——樂市前就是 Sports Depo，先買完再一路往南走到博物館，不折返。",
+    tbl:{head:["安謝 發","樂市前（Sports Depo）","縣立博物館前"],rows:[["12:47","12:52","12:54"],["12:52","12:56","12:58"],["13:27","13:32","13:34"],["14:07","14:12","14:14"]],hl:0},
+    notes:["備案 12:52、13:27。","倉庫前搭 101 番只有 13:55、15:02 兩班，別等。"],
+    map:"安謝 バス停 那覇" },
+  { t:"12:55", type:"shop", title:"Sports Depo 天久店", trans:"樂市前下車即到 · 10:00–21:00", brief:"3.9／1,544 · 免稅現場退現金 · HOKA、Nike、Adidas",
+    intro:"新都心區的大型運動用品店。免稅是先在櫃檯付款、再到店內另一櫃台領回稅金。有中文服務人員。鞋款區不如專門店，但運動服飾價格漂亮。",
+    notes:["外國旅客有免稅＋5% OFF 優惠券（taxfreeshops.jp／NAVITIME Japan Travel／MATCHA），不能與清倉品併用——結帳前先出示。","HOKA、On、NB 不一定每款便宜；穩賺的是 ASICS、Mizuno、Onitsuka Tiger。出發前把想買的型號台灣價格記在手機。","去程行李只加購 15 kg，回程各 20 kg——鞋盒與衣物留給回程。"],
+    map:"スポーツデポ 天久店" },
+  { t:"14:25", type:"spot", title:"沖繩縣立博物館・美術館", trans:"步行 570 m、8 分（一路往南）· 2 小時 20 分", brief:"4.3／5,484 · 週五開到 20:00 · 週一休館",
+    intro:"2007 年開館，外觀灰白的石灰岩城牆造型是向琉球「御城（グスク）」致敬。常設展從琉球王國的成立、與明清的朝貢貿易、1609 年薩摩入侵、1879 年琉球處分被併入日本、沖繩戰的慘烈、戰後 27 年美軍統治到 1972 年回歸，把沖繩「和日本一般城市很不一樣」的歷史講得很清楚，幾乎所有說明都有英文。美術館以沖繩與亞洲當代作品為主，兩館分開售票，可買聯票。",
+    notes:["進場先把購物袋寄投幣式寄物櫃（通常 ¥100 可退；文件未查證，現場確認，沒有就用 Main Place 的）。","多個展廳禁止拍照。","從おもろまち（歌町）站過來會經過 T-Galleria 免稅與 San-A。"],
+    map:"沖縄県立博物館・美術館" },
+  { t:"16:50", type:"shop", title:"Murasaki Sports（那霸 Main Place 2F）", trans:"步行 230 m、3 分 · 10:00–22:00", brief:"4.2／368 · Keen、Salomon 等登山鞋款，對百岳比較對味。", map:"ムラサキスポーツ 那覇メインプレイス" },
+  { t:"17:30", type:"transport", title:"單軌 おもろまち（歌町） → 旭橋", trans:"5 站、約 15 分 · 直接刷信用卡感應進站",
+    notes:["單軌單日車資自動上限 ¥800，比一日券便宜，不用買 pass。","單軌可刷 Suica，公車不行。"] },
+  { t:"17:50", type:"stay", title:"東橫INN check-in、放購物袋", intro:"放下鞋盒再走國際通去吃飯，全程不折返、不用提著逛街。" },
+  { t:"18:30", type:"food", title:"晚餐：元村炸牛排 國際通本店", trans:"走國際通 1.2 km、16 分 · 11:00–22:00 · 星巴克旁", brief:"4.9／20,928 · 整趟評價最高",
+    intro:"「牛かつ（炸牛排）」是東京發跡的吃法：厚切牛排裹細麵衣，只炸 60 秒，外酥內側還是粉紅半生，桌上有小烤盤可把切片自己再煎到喜歡的熟度。元村是牛かつ（炸牛排）的代表品牌，附冰茶與圍裙，白飯可免費續一次。",
+    menu:[{n:"牛かつ（炸牛排）定食 130g（點最小份就好，偏油）",top:true},{n:"山葵醬油"},{n:"岩鹽"},{n:"白飯續一次免費"}],
+    notes:["入口有候位表，自己寫名字和人數，不用一直站著排。有評論說 17:30 完全沒排隊。","部分分店歷史上只收現金；本店多數評論說可刷卡，進門前 Google Maps 再確認，否則多備 ¥3,000。"],
+    map:"元村 牛かつ 国際通り本店" },
+  { t:"19:50", type:"spot", tag:"市場", title:"第一牧志公設市場", trans:"元村步行 3 分 · 08:00–22:00", brief:"4.1／3,154 · 純逛，晚餐已吃",
+    intro:"戰後黑市起家、1950 年代成為「那霸的廚房」，2023 年新館重開。一樓賣海鮮、豬肉（沖繩的豬臉、豬腳都在這）、島蔬菜，二樓食堂可代客料理（買海鮮上樓加點幾道菜當代客費）。開到 22:00，晚餐後想再回來也行。",
+    map:"第一牧志公設市場" },
+  { t:"20:30", type:"shop", title:"國際通採買伴手禮", trans:"回飯店的 1.2 km 本來就是國際通，順路逛回去 · 多數店家開到 22:00",
+    intro:"戰後從一片廢墟快速復興，被稱為「奇蹟的一英里」（約 1.6 km），是那霸最熱鬧的商店街。",
+    menu:[{n:"紅芋塔（御菓子御殿）",top:true},{n:"金楚糕 ちんすこう"},{n:"黑糖、海葡萄"},{n:"Blue Seal 冰淇淋（紅芋、鹽金楚糕口味）"},{n:"泡盛"}],
+    notes:["日本免稅制度 2026/11 起改為出境後退稅，這趟仍是現場免稅。","保留回程 20 kg 額度給明後天的運動用品。"],
+    map:"国際通り 那覇" }
+]},
+{ date:"10/3", dow:"六", short:"北部一日遊", title:"中北部一日遊：萬座毛・古宇利・美麗海", stay:"東橫INN 那覇旭橋駅前", table:"跟團（不用巴士表）",
+  lead:"Klook 19157 一人成團、含門票。今天唯一要卡準的是 15:00 鯨鯊餵食秀：14:40 就去黑潮之海前站位。若預報天氣差，可與 10/4 對調——陸上行程下雨照跑。",
+  items:[
+  { t:"06:45", type:"food", title:"飯店免費早餐", trans:"東橫INN 一般 06:30–09:00", notes:["08:00 集合，07:20 前吃完。"] },
+  { t:"07:45", type:"transport", title:"走到縣廳前 RYUBO 百貨 Blue Seal 前集合", trans:"約 380 m、5 分 · 08:00 集合（或 08:20 DFS T Galleria）",
+    notes:["一日遊待訂：Klook 19157「No.1 人氣北部一日遊」NT$1,219 起、4.7／1,767、一人成團立即確認。KKday 版要湊 10 人，淡季會被取消，不採用。","備選 Klook 181710（5.0／46）：有評論說司機事先幫確認餵食秀時間，一進場就能卡位。"],
+    map:"リウボウ 県庁前 那覇" },
+  { t:"上午", type:"spot", title:"萬座毛", trans:"停留 30 分 · 門票 ¥100（一日遊多已含）", brief:"象鼻珊瑚礁斷崖，恩納村地標",
+    intro:"18 世紀琉球國王尚敬巡視至此，讚嘆這片草原「萬人也坐得下」，因而得名「萬座毛」（毛在琉球語指草原）。斷崖是隆起的珊瑚礁石灰岩，被海浪侵蝕成象鼻形狀，崖上是沖繩縣天然紀念物的石灰岩植物群落。繞一圈約 15 分，傍晚是夕陽名所，但今天是上午場，光線在海面上。",
+    map:"万座毛" },
+  { t:"上午", type:"spot", title:"古宇利島・古宇利大橋", trans:"停留 30 分", brief:"「戀之島」，沖繩版亞當與夏娃",
+    intro:"古宇利島流傳琉球的人類起源神話：一對男女從天而降，起初赤身無憂，每天天上會掉下麵餅；後來他們開始存糧，天上就不再落餅，兩人才學會勞動與遮羞——是沖繩版的亞當與夏娃，因此被稱作「戀之島」。2005 年開通的古宇利大橋長 1,960 m，是日本最長的免費跨海橋，橋下海水透明度極高。島北側的心型石（ティーヌ浜（Tinu 海灘））因偶像廣告成名，但 30 分鐘到不了。",
+    notes:["30 分鐘不要排蝦蝦飯——遊記原話「要上去買蝦蝦飯就有點太勉強了」。"],
+    map:"古宇利大橋" },
+  { t:"13:00", type:"spot", title:"沖繩美麗海水族館", trans:"約 13:00–17:00 · 08:30–18:30、最後入館 17:30", brief:"鯨鯊餵食 15:00／17:00 · 海豚秀 10:30／11:30／13:00／15:00／17:00",
+    intro:"位在 1975 年沖繩國際海洋博覽會舊址的海洋博公園內，2002 年開館。主水槽「黑潮之海」容水 7,500 噸，觀景壓克力面板厚 60 cm、寬 22.5 m，開館時是世界最大，裡面同時養著多隻鯨鯊與鬼蝠魟——鯨鯊在這裡的長期飼養紀錄是全球之最。15:00 餵食秀時鯨鯊會垂直立起身體吸食，是全館最精彩的一刻。動線是從淺灘珊瑚礁一路往深海，出口外有免費的海豚劇場與海牛、海龜館。",
+    facts:{"認真逛":"2–3 小時","含表演拍照":"3–4 小時"},
+    notes:["先逛室內水槽，14:40 就去黑潮之海前卡位。","水槽前的「黑潮探險」（觀景平台）有時段限制，進館先看告示。","館內冷氣強，帶薄外套。"],
+    map:"沖縄美ら海水族館" },
+  { t:"17:30", type:"spot", title:"北谷 美國村", trans:"逛街，不在這裡吃晚餐", brief:"美式風情商圈＋海邊步道",
+    intro:"北谷町在 1981 年美軍基地部分返還後填海開發的商業區，以美國西岸小鎮為藍本，色彩鮮豔的低矮建築、美式餐廳與二手古著店，周邊仍是美軍居住區，所以街上真的很多美國人。海岸邊的落日步道（サンセットビーチ（日落海灘））是看夕陽的地方，今天日落約 18:20，正好趕上。",
+    notes:["晚餐留給那霸的 Ocean BOO!，這裡只逛街。"],
+    map:"美浜アメリカンビレッジ" },
+  { t:"19:00", type:"transport", title:"回那霸 縣廳前／DFS 解散", trans:"走 5 分回飯店方向" },
+  { t:"19:15", type:"food", title:"晚餐：Ocean BOO! Naha（阿古豬涮涮鍋）", trans:"久米 2-11-26 幸福大樓 1F · 週六 12:00–15:00、17:00–22:00", brief:"4.4／534 · 離飯店 133 m、2 分",
+    intro:"阿古豬（アグー）是沖繩原生的黑毛豚，數量一度只剩 30 頭，經復育才回到餐桌；脂肪融點低、油花細、幾乎沒有豚臭味，做成涮涮鍋最能吃出甜味。評論大推湯頭與高麗菜，最後加粥收尾。",
+    menu:[{n:"阿古豬涮涮鍋（最少點 2 份）",top:true},{n:"高麗菜"},{n:"收尾雜炊粥"}],
+    notes:["有 1.5 小時用餐限制，有客訴說沒人事先告知一直被催——進去先問清楚時限。","每人 ¥330 桌費。","別跑錯到「國際通店」（3.9），要去的是久米這間。","評論普遍說不用訂位也進得去。"],
+    map:"Ocean BOO! 那覇 久米" },
+  { t:"20:50", type:"stay", title:"走回東橫INN", trans:"133 m、2 分", intro:"明早 08:40 的 54 番是週日只有 5 班的其中一班，08:25 要出門。" }
+]},
+
+{ date:"10/4", dow:"日", short:"玉泉洞・瀨長島", title:"沖繩世界・Gangala 之谷 → 瀨長島", stay:"東橫INN 那覇旭橋駅前", table:"日祝日表",
+  lead:"星期日南部巴士只有去 5 班、回 3 班，回程末班 15:50 之後就沒車。這是把 Gangala 改成 12:00 場的唯一理由：導覽結束後還有 2.5 小時緩衝。備案是園區外的排班計程車。",
+  items:[
+  { t:"07:20", type:"food", title:"飯店免費早餐", trans:"到 08:10" },
+  { t:"08:40", type:"transport", title:"54 番 那霸巴士總站 9 號乘車處 → 玉泉洞前 09:19", trans:"08:25 出門，步行 370 m、5 分 · 單程 ¥670 · 現金或感應信用卡",
+    intro:"9 號乘車處後面是全家。早 20 分鐘到純粹是買保險：54 番誤點還有 83 番可補，10:30 的太鼓秀不用趕。",
+    tbl:{head:["班次","那霸總站 發","玉泉洞前"],rows:[["54番","06:30","07:05"],["54番","08:40","09:19"],["83番","10:25","11:10"],["83番","12:05","12:50"],["83番","14:20","15:05"]],hl:1},
+    notes:["日祝日去程只有 5 班，已核對官方表。","今天早上塞不進任何景點，波上宮已排在 10/2。"],
+    map:"那覇バスターミナル" },
+  { t:"09:25", type:"spot", title:"沖繩世界・玉泉洞", trans:"09:00 開園 · 09:00–17:30、最後入園 16:00", brief:"門票 ¥2,000（KKday 156531 約 NT$370，掃 QR 換票免排隊）· 當日可重複入園",
+    intro:"玉泉洞是約 30 萬年形成的石灰岩鐘乳洞，全長 5 km、公開 890 m，鐘乳石超過 100 萬根，數量與密度號稱「東洋第一」，其中「槍天井」是無數細長鐘乳石倒懸的一片天花板，「青の泉（青之泉）」則是地下水積成的藍色池。步道走完 30–40 分，慢拍約 1 小時。洞口出來的「王國村」是把沖繩各地百年古民家移築過來的聚落（多棟為國家登錄有形文化財），可看紅型、琉球玻璃、三線等工藝體驗。園區還有熱帶果園與毒蛇博物公園。",
+    facts:{"超級太鼓秀":"10:30／12:30／14:30","毒蛇秀":"11:30／13:30／15:30"},
+    notes:["入場一律從玉泉洞開始（單向動線），重複入場時跟工作人員說一聲比較保險。","換票後的票券收好，重複入園要出示。","園內有投幣式寄物櫃、免費 Wi-Fi、繁中手冊，但工作人員不提供外語服務。","沒有玉泉洞＋Gangala 官方套票，兩邊分開買。"],
+    map:"おきなわワールド 玉泉洞" },
+  { t:"10:30", type:"spot", tag:"表演", title:"超級太鼓秀（エイサー（沖繩太鼓舞））", trans:"10:30–11:00 · 王國村廣場",
+    intro:"エイサー（沖繩太鼓舞）是沖繩盂蘭盆節（舊曆 7 月）迎送祖先靈魂的青年會舞，男子背大鼓邊擊邊舞、女子手舞、還有塗白臉的「京太郎」逗趣穿場。沖繩世界的版本改編成舞台秀，加入獅子舞與觀眾互動，30 分鐘節奏很快。" },
+  { t:"11:30", type:"food", tag:"咖啡", title:"Cave Cafe 喝 35 咖啡", trans:"步行 5 分 · 11:30–11:50 · 只有飲料，約 ¥500", brief:"只有導覽參加者能進，而且只能在出發前喝",
+    intro:"Gangala 的報到處就在一個巨大的鐘乳洞洞口下，Cave Cafe 是洞裡的咖啡座。招牌「35 コーヒー（35 咖啡）」用風化死亡的珊瑚（サンゴ，日文諧音 35）當烘焙介質，部分收益捐給珊瑚復育。",
+    menu:[{n:"35 咖啡",top:true},{n:"沙翁、沖繩煎餅等零食（另售）"}],
+    notes:["解散點是おきなわワールド（沖繩世界）巴士停車場，不會回到 Cave Cafe——要喝就現在。","只賣飲料，午餐要回沖繩世界園區吃。","11:50 報到截止（出發前 10 分鐘）。","園內攤位偏現金。"],
+    map:"ガンガラーの谷 CAVE CAFE" },
+  { t:"12:00", type:"spot", tag:"導覽", title:"Gangala 之谷 導覽（12:00 場，80 分）", trans:"解散於おきなわワールド（沖繩世界）巴士停車場", brief:"預約制 · 步道 1 km · 中文語音導覽機",
+    intro:"數十萬年前鐘乳洞崩塌形成的亞熱帶山谷，只能跟導覽進入。谷內有兩個相連的洞穴聖地「イナグ洞」與「イキガ洞」（女洞、男洞），自古是祈求生育與成長的地方；一棵樹齡約 150 年的「大主ガジュマル」（榕樹之王）氣根從崖上垂落十幾公尺。最重要的是這裡正在挖掘「港川人」的痕跡——約 2 萬年前的舊石器時代人骨曾在附近出土，谷中的武芸洞出土了日本最古的埋葬人骨，考古現場就開放在導覽路線旁。導遊只講日語，有中文語音機，會發裝冰茉莉花茶的水壺（要還）和防蟲噴霧。",
+    notes:["待訂：book.gangala.com（右上角切繁中），只能前一日 17:00 前訂——設 10/3 中午的提醒。電話 +81-98-948-4192（09:00–17:30）。","出發前有聯絡取消收 50%，未聯絡 100%；天候中止免費。","步道有階梯與石頭路，穿好走的鞋。"],
+    map:"ガンガラーの谷" },
+  { t:"13:30", type:"spot", tag:"表演", title:"毒蛇秀（ハブ博物公園（毒蛇博物公園））", trans:"出示門票重複入園 · 13:30–14:00",
+    intro:"「ハブ」是沖繩特有的毒蛇波布，表演會講解它與蒙哥（マングース）的故事——20 世紀初為滅蛇引進蒙哥，結果蒙哥白天活動、波布晚上出沒，兩者根本不相遇，反而成了外來入侵物種，是生態學經典的失敗案例。" },
+  { t:"14:00", type:"food", title:"園區午餐（王國村）", trans:"14:00–15:00，之後補逛、買伴手禮到 15:30",
+    menu:[{n:"沖繩そば（沖繩麵）"},{n:"塔可飯"},{n:"紅芋點心"},{n:"波布酒（伴手禮）"}],
+    notes:["園內攤位偏現金，備 ¥4,500 含 Cave Cafe 與寄物櫃。"] },
+  { t:"15:50", type:"transport", title:"83 番末班 玉泉洞前 → 那霸巴士總站 16:35", trans:"15:40 走到「玉泉洞前」站 · ¥670",
+    tbl:{head:["班次","玉泉洞前 發","那霸總站"],rows:[["83番","11:35","12:18（旭橋）"],["83番","13:25","14:10"],["83番","15:50","16:35 末班"]],hl:2},
+    notes:["當天最後一班，之後沒有了。","備案：沖繩世界外面有排班計程車，到那霸機場約 30 分。"],
+    map:"玉泉洞前 バス停" },
+  { t:"16:40", type:"transport", title:"單軌 旭橋 → 赤嶺（4 站、約 10 分）→ 東京巴士 TK01／TK02／TK04 → 瀨長島", trans:"赤嶺站「南口」上車 · ¥250 · 不收 IC 卡，感應信用卡最省事",
+    intro:"瀨長島免費接駁車已取消，改成收費的東京巴士。TK04 只跑週六日假日（機場⇄赤嶺⇄瀨長島，約 1 小時一班）；TK01、TK02 每天跑、約 30 分一班，也停赤嶺。今天週日三條都有。",
+    notes:["往瀨長島在赤嶺站南口上車；往機場在北口圓環，別搭反。","有 1 日 ¥1,000 券但只搭來回兩趟用不到。"],
+    map:"赤嶺駅" },
+  { t:"17:20", type:"spot", title:"瀨長島 Umikaji Terrace", trans:"10:00–21:00 · 停留約 2 小時 · 日落約 18:20", brief:"希臘風白色階梯商場，看夕陽與飛機起降",
+    intro:"瀨長島是那霸機場南側的小島，本來是海上的軍事區與廢棄地，2015 年開幕的 Umikaji Terrace 把西向斜坡蓋成一整片白牆的階梯式商場，靈感來自地中海聖托里尼；面對的是機場跑道，飛機幾乎從頭頂降落，是沖繩看夕陽和拍機的名所。島上還有龍神之湯溫泉，適合冬天。",
+    menu:[{n:"幸福鬆餅（排 1–2 小時，時間不夠就跳過）"},{n:"Blue Seal"},{n:"各家海景咖啡與小吃攤"}],
+    notes:["幸福鬆餅已取消線上預約只能現場排。","島上完全沒有遮蔽物與樹蔭，帶帽子與水。","攤位不一定能刷卡，備 ¥4,000。","回程班次（瀬長島ホテル（瀨長島飯店）站）：18:44／19:29／20:04／20:22／21:02／22:12，另一版本標末班 21:15，現場再確認。"],
+    map:"瀬長島ウミカジテラス" },
+  { t:"19:29", type:"transport", title:"TK02 瀨長島ホテル（瀨長島飯店） → 赤嶺駅 19:41 → 單軌 1 站到小祿", trans:"¥250、約 12 分 · 全程同方向不折返",
+    notes:["單軌順序：那霸機場－赤嶺－小祿－奧武山公園－壺川－旭橋。","想多待：TK02 還有 20:04、20:22，通堂開到午夜。"] },
+  { t:"19:55", type:"food", title:"晚餐：琉球新麵 通堂 小祿本店", trans:"小祿駅步行 100 m、2 分 · 每天 11:00–24:00", brief:"4.4／4,245 · 券売機",
+    intro:"沖繩拉麵名店，本店就在小祿。招牌兩款湯：豚骨的「男味」濃厚但不油膩、沒有福岡那種強烈氣味；雞白湯的「女味」清爽偏鹽味。先找位子 → 去券売機買券 → 回座位交店員。桌上的醃蒜頭評價很好。",
+    menu:[{n:"男味（豚骨）",top:true},{n:"女味（雞白湯）",top:true},{n:"桌上醃蒜頭"},{n:"餃子"}],
+    map:"琉球新麺 通堂 小禄本店" },
+  { t:"21:10", type:"transport", title:"單軌 小祿 → 旭橋（3 站）→ 回飯店", trans:"約 21:25 到" }
+]},
+
+{ date:"10/5", dow:"一", short:"晨跑・ライカム（Rycom）", title:"晨跑 → AEON ライカム（Rycom） → 機場", stay:"—（21:40 起飛）", table:"平日表",
+  lead:"策略不對稱：去程搭高速 152（錯過只是晚 30 分），回程改普通路線 21／92（班次密，不會被一天 4 班的高速車綁住）。16:30 是離開ライカム（Rycom）的底線。",
+  items:[
+  { t:"06:45", type:"transport", title:"飯店 → 旭橋 單軌 1 站 → 壺川", trans:"壺川站有橋直接跨過國場川進公園" },
+  { t:"06:55", type:"spot", tag:"晨跑", title:"奧武山公園晨跑，順路看沖宮", trans:"06:55–07:50 · 免費 · 24 小時", brief:"4.3／3,152 · 那霸的市民運動公園",
+    intro:"奧武山公園有棒球場（沖繩職棒春訓地）、田徑場與多條步道，早晨很多在地人跑步。園內的沖宮是琉球八社之一，紅鳥居配原木色拜殿，入口有碑紀念這裡是空手道的發源地（琉球王國時代的武術「手（ティー）」在此傳承）。順路可看壺川東公園保存的「輕便鐵道」機關車——沖繩戰前有過比本土更窄軌的縣營鐵道，當地人叫「ケービン」，戰爭中全毀；公園蓋在舊鐵道遺址上，挖出的鐵軌原地保留，沒有圍欄可直接看進駕駛座。",
+    notes:["護國神社 09:30 才開，晨跑時段沒開。","漫湖水鳥・濕地中心週一公休，今天去不了。","跑完 08:10 回飯店沖澡，08:25 吃早餐——這是東橫INN 早餐的最後半小時。想吃得好就把晨跑縮到 07:35。"],
+    map:"沖宮 那覇" },
+  { t:"08:25", type:"food", title:"飯店免費早餐（30 分）", trans:"東橫INN 一般供應到 09:00", notes:["最後半小時，別遲。"] },
+  { t:"09:00", type:"stay", title:"退房，行李寄櫃檯", intro:"09:10 走到旭橋・那霸巴士總站 11 號乘車處（370 m、5 分），緩衝 27 分。" },
+  { t:"09:37", type:"transport", title:"高速 152 旭橋 11 號乘車處 → イオンモール沖縄ライカム（AEON MALL 沖繩 Rycom） 10:16", trans:"車程 39 分 · ¥980 · 商場門口下車",
+    tbl:{head:["停靠站","時刻","車資"],rows:[["那霸機場 國內線","09:30","—"],["旭橋・巴士總站 11 號","09:37","—"],["國場","09:46","¥280"],["那霸インター前（那霸交流道前）","09:53","¥280"],["琉大入口","10:00","¥700"],["イオンモール沖縄ライカム（AEON MALL 沖繩 Rycom）","10:16","¥980"]],hl:1},
+    notes:["旭橋是 09:37，不是機場的 09:30。","¥980 不是 ¥1,120——後者是機場起算全程票價。","錯過就改 21／92，只是晚 30 分到。"],
+    map:"那覇バスターミナル 11番" },
+  { t:"10:20", type:"shop", title:"AEON MALL 沖繩ライカム（Rycom）", trans:"10:00–22:00 · 5 小時含午餐", brief:"4.4／16,449 · 沖繩最大購物中心 · 唯一的 Pokémon Center",
+    intro:"2015 年在美軍泡瀨高爾夫球場返還地上開幕，是沖繩最大的購物中心。有 UNIQLO、H&M、Bic Camera、Daiso、Toys R Us、電影院與大型美食街；AEON Style 1 樓超市適合買零食伴手禮。mont-bell 沖縄ライカム（Rycom）店也在這裡（登山雨衣、底層衣、襪子）。",
+    menu:[{n:"Pokémon Center Okinawa",top:true},{n:"mont-bell（雨衣、底層、襪子）",top:true},{n:"Bic Camera 免稅"},{n:"AEON 超市零食伴手禮"}],
+    notes:["到了先去 1F 服務櫃檯問「高速巴士免費回程票活動」。","mont-bell 沒有旅客折價券，只有免稅；衣服尺寸建議 M、襪子 M（24–26 cm）。","行李 20 kg 上限，買完在商場先秤一下。"],
+    map:"イオンモール沖縄ライカム" },
+  { t:"15:30", type:"transport", title:"21／92 番 商場門口 → 旭橋巴士總站 16:25–16:59", trans:"車程 55–89 分 · ¥900 · 或走 5 分到「比嘉西原」搭 23／27／80／110",
+    intro:"回程有飛機要趕，不賭一天只有 4 班的高速 152（16:20 那班之後就是 19:15，會誤機）。21 番途中經おもろまち（歌町）駅前，塞車時可提早下車轉單軌。",
+    tbl:{head:["ライカム（Rycom） 出發","抵旭橋","抵機場","距起飛"],rows:[["15:00","15:55–16:29","16:35–17:09","4h31–5h05"],["15:30 ←採用","16:25–16:59","17:05–17:39","4h01–4h35"],["16:00","16:55–17:29","17:35–18:09","3h31–4h05"],["16:30 ←底線","17:25–17:59","18:05–18:39","3h01–3h35"]],hl:1},
+    notes:["別搭 111／113／123／127——停「高速山里」要走 15 分。","官方發車時刻表是圖片沒能核對，出發前用 バスなび沖縄（busnavi-okinawa.com，繁中）查一次。","最後保險：第一交通 0120-37-9439，到機場約 40 分。"],
+    map:"イオンモール沖縄ライカム バス停" },
+  { t:"17:00", type:"transport", title:"旭橋 → 東橫INN 取行李 → 單軌 → 那霸機場", trans:"步行 5 分＋取行李 10 分＋步行 5 分＋單軌 13 分＋走到櫃檯 5 分 ≈ 40 分",
+    notes:["最晚 18:40 到機場（起飛前 3 小時）。"] },
+  { t:"17:30", type:"food", title:"機場晚餐：ポーたま（豬肉蛋飯糰） 機場店", trans:"開到 21:00 · 17:05–17:39 抵達報到", menu:[{n:"3 號 炸蝦"},{n:"國際線店限定 滷肉飯口味"}], notes:["回程行李各 20 kg（tigersmart 已含）。"], map:"ポーたま 那覇空港国際線店" },
+  { t:"21:40", type:"transport", title:"IT233 起飛 → 22:10 桃園", trans:"1819 機場發車末班 23:30、下一班 00:20",
+    notes:["回到台北轉運站時北捷可能已收班，最後一段回永和叫車。"] }
+]}
+];
+
+const CHECKLIST = [
+ { g:"證件・票券・錢", why:"出發前一晚攤在桌上核對一次", items:[
+   ["護照（效期 6 個月以上）"],["虎航訂位＋行李加購／選位完成","前一晚睡前在官網弄好"],["麗山確認信 ×2（兩晚不同房型）"],["東橫INN 確認信","核對 check-in 16:00／早餐時段"],["リゾートライナー（Resort Liner 機場接駁巴士） 9/30 確認信","看乘車地點是國內線或國際線航廈"],["リゾートライナー（Resort Liner 機場接駁巴士） 10/2 08:26 訂位"],["琉球の牛（琉球之牛）訂位確認（10/1 17:30）"],["Klook 一日遊憑證（10/3）"],["KKday 青洞憑證（10/1 09:30）"],["Gangala 12:00 場預約","只能 10/3 17:00 前訂，設提醒"],["沖繩世界門票 QR（KKday 156531）"],["旅平＋不便險保單"],["日幣現金 ¥50,000","要 ¥1,000 鈔至少 20 張，公車找零不收大鈔"],["零錢包","車資 ¥250、¥670 很吃硬幣"],["感應式信用卡（開海外）","公車、東京巴士、單軌都靠它"],["金融卡開跨國提款","缺現金到 FamilyMart 7-Bank ATM 領"],["悠遊卡（1819 用）"]
+ ]},
+ { g:"浮潛（10/1）", why:"店家直接載去 OIST，不回飯店", items:[
+   ["泳衣（出門先穿在裡面）"],["快乾毛巾"],["一套換洗衣物＋內衣"],["防水袋／夾鏈袋裝濕衣"],["海洋友善防曬"],["拖鞋或水陸鞋"],["手機防水袋"],["暈船藥（怕暈就先吃）"]
+ ]},
+ { g:"衣物與鞋", why:"10 月初 27–30°C，白天曬、館內冷氣強", items:[
+   ["短袖 ×6"],["薄長袖或防曬外套","水族館、博物館冷氣＋防曬"],["長褲 ×1（Gangala 防蚊）"],["好走的鞋","仲泊遺跡石疊、OIST 階梯、Gangala 1 km 步道"],["跑鞋＋跑衣（10/5 晨跑）"],["帽子＋太陽眼鏡","瀨長島、萬座毛完全沒遮蔽"],["折傘／輕便雨衣","颱風季尾"],["內衣襪子 ×6"]
+ ]},
+ { g:"電子與日用", items:[
+   ["手機＋行動電源","一天靠 Google Maps／NAVITIME 查車"],["充電線（日本插座與台灣同款，不用轉接頭）"],["eSIM／SIM 卡"],["耳塞","東橫INN 隔音差、有機車聲"],["個人常備藥"],["防蚊液（Gangala 有提供，其他地方自備）"],["濕紙巾"],["折疊購物袋","免稅購物、博物館寄物"],["行李秤","去程 15 kg、回程各 20 kg"],["回程行李留空間給運動用品與伴手禮"]
+ ]},
+ { g:"出發前一週要做", items:[
+   ["核對 9/30 谷茶の丘（谷茶之丘） 12:54 南下、19:35 北上（NAVITIME）"],["核對 10/4 54／83 番日祝班表與 83 番 15:50 末班"],["查ライカム（Rycom）回程 21／92 發車時刻（バスなび沖縄（沖繩巴士導航網））"],["追日本氣象廳颱風動態","三層退款機制：店家取消→Klook 未體驗退款→班機取消證明寄客服"],["把想買的運動用品型號＋台灣價格記在手機"],["換匯：台銀牌告，指定 ¥1,000 鈔"],["浜の家（濱之家） 9/30 晚餐訂位（可選）"],["確認元村本店現在可否刷卡（Google Maps 最新評論）"]
+ ]}
+];
+</script>
+<script>
+(function(){
+  const TYPE = {
+    transport:{label:"交通",c:"var(--color-stroke)",l:"var(--tint-secondary)",icon:"i-bus"},
+    spot:{label:"景點",c:"var(--color-highlight)",l:"var(--tint-highlight)",icon:"i-pin"},
+    food:{label:"餐廳",c:"var(--food-c)",l:"var(--tint-tertiary)",icon:"i-star"},
+    stay:{label:"住宿",c:"var(--stay-c)",l:"var(--tint-stroke)",icon:"i-bed"},
+    shop:{label:"購物",c:"var(--color-highlight)",l:"var(--tint-paragraph)",icon:"i-list"}
+  };
+  const esc = s => String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+  const ic = (id,cls="ic") => `<svg class="${cls}" aria-hidden="true" focusable="false"><use href="#${id}"/></svg>`;
+  const mapUrl = q => "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const tabs = document.getElementById("tabs");
+  const view = document.getElementById("view");
+  const LIST = DAYS.length;
+  let current = -1;
+
+  /* ---------- Tabs (WAI-ARIA tabs: arrow keys, Home/End) ---------- */
+  DAYS.forEach((d,i)=>{
+    const b=document.createElement("button");
+    b.className="tab"; b.setAttribute("role","tab"); b.id="tab-"+i; b.setAttribute("aria-controls","view"); b.dataset.i=i;
+    b.innerHTML=`<span class="d">${esc(d.date)}<small>${esc(d.dow)}</small></span><span class="w">${esc(d.short)}</span>`;
+    b.addEventListener("click",()=>go(i,true));
+    tabs.appendChild(b);
+  });
+  const lt=document.createElement("button");
+  lt.className="tab list"; lt.setAttribute("role","tab"); lt.id="tab-"+LIST; lt.setAttribute("aria-controls","view"); lt.dataset.i=LIST;
+  lt.innerHTML=`<span class="d">清單</span><span class="w">旅行＋待辦</span>`;
+  lt.addEventListener("click",()=>go(LIST,true));
+  tabs.appendChild(lt);
+
+  tabs.addEventListener("keydown",e=>{
+    const n=tabs.children.length; let i=current;
+    if(e.key==="ArrowRight") i=(current+1)%n;
+    else if(e.key==="ArrowLeft") i=(current-1+n)%n;
+    else if(e.key==="Home") i=0;
+    else if(e.key==="End") i=n-1;
+    else return;
+    e.preventDefault(); go(i,true); tabs.children[i].focus();
+  });
+
+  function slug(i){ return i===LIST ? "list" : "day"+(i+1); }
+  function fromHash(){
+    const h=location.hash.replace("#","");
+    if(h==="list") return LIST;
+    const m=/^day(\d)$/.exec(h); if(m){ const k=+m[1]-1; if(k>=0&&k<LIST) return k; }
+    return null;
+  }
+
+  function go(i,push){
+    if(i===current) return;
+    current=i;
+    [...tabs.children].forEach((b,j)=>{ const sel=j===i; b.setAttribute("aria-selected",sel?"true":"false"); b.tabIndex=sel?0:-1; });
+    tabs.children[i].scrollIntoView({block:"nearest",inline:"center",behavior:reduced.matches?"auto":"smooth"});
+    view.setAttribute("aria-labelledby","tab-"+i);
+    view.innerHTML = i<LIST ? renderDay(DAYS[i]) : renderChecklist();
+    if(i===LIST) bindChecklist();
+    if(push){ history.pushState(null,"","#"+slug(i)); window.scrollTo({top:0,behavior:reduced.matches?"auto":"smooth"}); }
+    try{ localStorage.setItem("oki-tab", String(i)); }catch(e){}
+  }
+  window.addEventListener("popstate",()=>{ const i=fromHash(); if(i!==null) go(i,false); });
+
+  /* ---------- Day rendering ---------- */
+  function renderDay(d){
+    const items = d.items.map((it,idx)=>{
+      const ty=TYPE[it.type]||TYPE.spot;
+      const hasMore = it.intro||it.menu||it.tbl||it.facts;
+      const moreId=`more-${idx}`;
+      const more = hasMore ? `<div class="more" id="${moreId}" role="region" aria-labelledby="t-${idx}" hidden><div><div class="inner">
+          ${it.intro?`<h4>${it.type==="food"?"關於這家店":it.type==="transport"?"說明":it.type==="stay"?"關於住宿":"事前了解"}</h4><p>${esc(it.intro)}</p>`:""}
+          ${it.facts?`<h4>基本資訊</h4><dl class="fact">${Object.entries(it.facts).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>`:""}
+          ${it.menu?`<h4>${it.type==="food"?"推薦品項":"必看／必買"}</h4><div class="menu" role="list">${it.menu.map(m=>`<span role="listitem">${m.top?ic("i-star","ic sm")+`<span class="sr" hidden>推薦</span>`:""}${esc(m.n)}</span>`).join("")}</div>`:""}
+          ${it.tbl?`<h4>班次表</h4><div class="ttwrap"><table class="tt"><thead><tr>${it.tbl.head.map(h=>`<th scope="col">${esc(h)}</th>`).join("")}</tr></thead><tbody>${it.tbl.rows.map((r,ri)=>`<tr class="${ri===it.tbl.hl?"hl":""}" ${ri===it.tbl.hl?'aria-label="行程採用的班次"':''}>${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`:""}
+        </div></div></div>`:"";
+      const actions = `<div class="actions">
+          ${hasMore?`<button type="button" class="btn detail" aria-expanded="false" aria-controls="${moreId}" data-more="${idx}"><span class="lbl">詳細介紹</span>${ic("i-chev","ic sm chev")}</button>`:""}
+          ${it.notes&&it.notes.length?`<button type="button" class="ibtn" aria-haspopup="dialog" aria-label="${esc(it.title)} 的注意事項（${it.notes.length} 項）" data-notes="${idx}">${ic("i-info","ic sm")}<span>注意 ${it.notes.length}</span></button>`:""}
+          ${it.map?`<a class="btn map" href="${mapUrl(it.map)}" target="_blank" rel="noopener" aria-label="在 Google 地圖開啟 ${esc(it.map)}（新視窗）">${ic("i-pin","ic sm")}地圖${ic("i-ext","ic sm")}</a>`:""}
+        </div>`;
+      return `<article class="item t-${it.type}" style="--type:${ty.c};--type-light:${ty.l}">
+        <div class="time" aria-label="時間 ${esc(it.t)}">${esc(it.t)}</div><div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="top"><h3 class="title" id="t-${idx}" style="margin:0">${esc(it.title)}</h3>${it.type!=="transport"?`<span class="tag">${ic(ty.icon,"ic sm")}${esc(it.tag||ty.label)}</span>`:""}</div>
+          ${it.trans?`<div class="trans">${ic("i-arrow","ic sm")}<span>${esc(it.trans)}</span></div>`:""}
+          ${it.brief?`<div class="brief">${esc(it.brief)}</div>`:""}
+          ${(hasMore||it.notes||it.map)?actions:""}
+          ${more}
+        </div></article>`;
+    }).join("");
+    return `<div class="dayhead">
+        <h2>${esc(d.date)}（${esc(d.dow)}）${esc(d.title)}</h2>
+        <div class="meta"><span>${ic("i-bed","ic sm")}${esc(d.stay)}</span><span>${ic("i-bus","ic sm")}${esc(d.table)}</span></div>
+        ${d.lead?`<p class="lead">${esc(d.lead)}</p>`:""}
+      </div>
+      <div class="legend" aria-label="圖例">${Object.values(TYPE).map(t=>`<span><i style="--c:${t.c}"></i>${t.label}</span>`).join("")}</div>
+      <div class="tl">${items}</div>`;
+  }
+
+  view.addEventListener("click",e=>{
+    const dBtn=e.target.closest("[data-more]");
+    if(dBtn){
+      const box=document.getElementById("more-"+dBtn.dataset.more);
+      const open=!box.classList.contains("open");
+      if(open){ box.hidden=false; requestAnimationFrame(()=>box.classList.add("open")); }
+      else { box.classList.remove("open"); if(reduced.matches) box.hidden=true; else box.addEventListener("transitionend",()=>{ if(!box.classList.contains("open")) box.hidden=true; },{once:true}); }
+      dBtn.setAttribute("aria-expanded",open?"true":"false");
+      dBtn.querySelector(".lbl").textContent=open?"收合":"詳細介紹";
+      return;
+    }
+    const nBtn=e.target.closest("[data-notes]");
+    if(nBtn){ openSheet(DAYS[current].items[+nBtn.dataset.notes], nBtn); }
+  });
+
+  /* ---------- Bottom sheet: focus trap, Escape, return focus ---------- */
+  const bg=document.getElementById("sheetbg"), closeBtn=document.getElementById("sheet-close");
+  let opener=null;
+  function openSheet(it,btn){
+    opener=btn;
+    document.getElementById("sheet-name").textContent=it.title;
+    document.getElementById("sheet-list").innerHTML=it.notes.map(n=>`<li>${ic("i-alert","ic sm")}<span>${esc(n)}</span></li>`).join("");
+    bg.classList.add("open"); bg.setAttribute("aria-hidden","false");
+    document.body.style.overflow="hidden";
+    document.getElementById("main").setAttribute("aria-hidden","true");
+    closeBtn.focus();
+  }
+  function closeSheet(){
+    if(!bg.classList.contains("open")) return;
+    bg.classList.remove("open"); bg.setAttribute("aria-hidden","true");
+    document.body.style.overflow="";
+    document.getElementById("main").removeAttribute("aria-hidden");
+    if(opener) opener.focus();
+  }
+  closeBtn.addEventListener("click",closeSheet);
+  bg.addEventListener("click",e=>{ if(e.target===bg) closeSheet(); });
+  document.addEventListener("keydown",e=>{
+    if(!bg.classList.contains("open")) return;
+    if(e.key==="Escape"){ closeSheet(); return; }
+    if(e.key==="Tab"){ e.preventDefault(); closeBtn.focus(); } // single focusable control
+  });
+
+  /* ---------- Toast ---------- */
+  const toast=document.getElementById("toast"); let tt;
+  function say(msg,action){
+    toast.innerHTML=ic("i-check","ic sm")+`<span>${esc(msg)}</span>`+(action?`<button type="button" class="btn ghost" style="min-height:36px;color:#3fb3b3;margin-left:4px" id="toast-act">${esc(action.label)}</button>`:"");
+    toast.classList.add("show");
+    if(action) document.getElementById("toast-act").addEventListener("click",()=>{ action.fn(); hideToast(); });
+    clearTimeout(tt); tt=setTimeout(hideToast, action?6000:3000);
+  }
+  function hideToast(){ toast.classList.remove("show"); }
+
+  /* ---------- Checklist ---------- */
+  const KEY="oki-checklist-v1";
+  function loadChecks(){ try{ return JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){ return {}; } }
+  function saveChecks(o){ try{ localStorage.setItem(KEY,JSON.stringify(o)); return true; }catch(e){ return false; } }
+  function renderChecklist(){
+    const st=loadChecks(); let total=0,done=0;
+    const groups=CHECKLIST.map((g,gi)=>{
+      let gd=0;
+      const rows=g.items.map((it,ii)=>{
+        const id=`c-${gi}-${ii}`; total++; const c=!!st[id]; if(c){done++;gd++;}
+        return `<div class="check ${c?"done":""}"><input type="checkbox" id="${id}" data-id="${id}" ${c?"checked":""}><label class="lab" for="${id}">${esc(it[0])}${it[1]?`<small>${esc(it[1])}</small>`:""}</label></div>`;
+      }).join("");
+      return `<section class="group" aria-labelledby="g-${gi}"><h3 id="g-${gi}">${esc(g.g)}<small aria-label="完成 ${gd} 項，共 ${g.items.length} 項">${gd}／${g.items.length}</small></h3>${g.why?`<p class="why">${esc(g.why)}</p>`:""}${rows}</section>`;
+    }).join("");
+    return `<div class="dayhead"><h2>旅行清單</h2><div class="meta"><span>${ic("i-list","ic sm")}依這趟行程整理：浮潛不回飯店、公車只收現金、東橫INN 要耳塞</span></div></div>
+      <div class="prog"><div class="row"><b>已準備 <span id="p-done">${done}</span>／${total}</b><button type="button" class="btn ghost" id="p-reset">${ic("i-reset","ic sm")}全部重設</button></div>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${done}" aria-label="準備進度"><i id="p-bar" style="width:${total?done/total*100:0}%"></i></div>
+      <p class="hint">勾選會存在這台裝置的瀏覽器裡，換裝置不會同步。</p></div>
+      ${groups}`;
+  }
+  function bindChecklist(){
+    const all=[...view.querySelectorAll('input[type=checkbox]')];
+    const refresh=()=>{
+      const d=all.filter(x=>x.checked).length;
+      document.getElementById("p-done").textContent=d;
+      const bar=document.getElementById("p-bar"); bar.style.width=(d/all.length*100)+"%"; bar.parentElement.setAttribute("aria-valuenow",d);
+      view.querySelectorAll(".group").forEach(grp=>{ const n=grp.querySelectorAll("input:checked").length, t=grp.querySelectorAll("input").length; const s=grp.querySelector("h3 small"); s.textContent=`${n}／${t}`; s.setAttribute("aria-label",`完成 ${n} 項，共 ${t} 項`); });
+      if(d===all.length) say("全部準備好了，出發！");
+    };
+    all.forEach(cb=>cb.addEventListener("change",()=>{
+      const st=loadChecks(); if(cb.checked) st[cb.dataset.id]=1; else delete st[cb.dataset.id];
+      if(!saveChecks(st)) say("這個瀏覽器無法儲存勾選，關掉頁面就會重來");
+      cb.closest(".check").classList.toggle("done",cb.checked);
+      refresh();
+    }));
+    document.getElementById("p-reset").addEventListener("click",()=>{
+      const before=loadChecks(); const n=Object.keys(before).length;
+      if(!n){ say("目前沒有已勾選的項目"); return; }
+      if(!confirm(`清除全部 ${n} 個已勾選項目？`)) return;
+      saveChecks({}); view.innerHTML=renderChecklist(); bindChecklist();
+      say("已重設清單",{label:"復原",fn:()=>{ saveChecks(before); view.innerHTML=renderChecklist(); bindChecklist(); }});
+    });
+  }
+
+  /* ---------- Initial route: hash > today (during trip) > saved > Day 1 ---------- */
+  let start=fromHash();
+  if(start===null){
+    try{
+      const now=new Date(); const m=now.getMonth()+1, dd=now.getDate();
+      const idx=[[9,30],[10,1],[10,2],[10,3],[10,4],[10,5]].findIndex(([mm,d])=>mm===m&&d===dd);
+      if(now.getFullYear()===2026&&idx>=0) start=idx;
+    }catch(e){}
+  }
+  if(start===null) start=0;
+  go(start,false);
+  history.replaceState(null,"","#"+slug(start));
+})();
+</script>
+</body>
+</html>
